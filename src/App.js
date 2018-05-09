@@ -9,7 +9,7 @@ class Main extends React.Component {
   render() {
     return (
       <div>
-        <p>ok</p>
+        <p>ok222</p>
         <button onClick={()=>console.log('ok')}>test</button>
       </div>
     )
