@@ -1,16 +1,23 @@
-const path = require('path')
-const webpack = require('webpack')
-const htmlPlugin = require('html-webpack-plugin')
+import path from 'path';
+import webpack from 'webpack'
+
+import htmlWebpackPlugin from 'html-webpack-plugin'
+import ProgressBarPlugin from 'progress-bar-webpack-plugin'
+
+import { config, main } from '../package.json'
 
 const { NODE_ENV } = process.env
-
+const { source, dist, template } = config
+const appPath = path.join(__dirname, `../${source}`)
+console.log(NODE_ENV, appPath)
 // 通用配置
-const config = {
+const webpackConfig = {
   mode: NODE_ENV,
-  target: 'web',
-  entry: path.join(__dirname, '../src/index.js'),
+  // target: 'web',
+  // publicPath: '/',
+  entry: path.join(__dirname, `../${source}/${main}`),
   output: {
-    path: path.join(__dirname, '../dist'),
+    path: path.join(__dirname, `../${dist}`),
     filename: 'bundle.js'
   },
 
@@ -18,11 +25,12 @@ const config = {
     rules: [
       {
         test: /\.(js|jsx)$/,
-        include: path.join(__dirname, '../src'),
+        include: appPath,
         loader: 'babel-loader'
       },
       {
         test: /\.css$/,
+        include: appPath,
         use: [
           'style-loader',
           'css-loader',
@@ -30,6 +38,7 @@ const config = {
       },
       {
         test: /\.(png|jpg|jpeg|gif|svg)$/,
+        include: appPath,
         use: [
           {
             loader: 'url-loader',
@@ -43,41 +52,28 @@ const config = {
     ]
   },
   plugins: [
-    new htmlPlugin({
-      title: 'title',
-      filename: 'index.html'
+    new ProgressBarPlugin(),
+    new htmlWebpackPlugin({
+      // title: 'title',
+      template: path.join(__dirname, `../${source}/${template}`),
+      filename: template,
     }),
-    new webpack.DefinePlugin({
-      NODE_ENV: `${NODE_ENV}`
-    })
-  ]
+  ],
 }
 
 if (NODE_ENV == 'development') {
-  // 开发环境配置
-  config.devtool = 'source-map'
-  config.devServer = {
-    port: 3000,
-    host: 'localhost',
-    hot: true,
-    inline: true,
-    clientLogLevel: 'none',
-    historyApiFallback: true,
-    overlay: {
-      errors: true
-    },
-    open: false,
-  }
-
-  config.plugins.push(
+  // 开花环境配置
+  console.log('开发环境')
+  webpackConfig.plugins.push(
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoEmitOnErrorsPlugin()
+    new webpack.NoEmitOnErrorsPlugin(),
   )
 } else if (NODE_ENV == 'production') {
   // 生产环境配置
+  console.log('生产环境')
   config.plugins.push(
     new webpack.optimize.UglifyJsPlugin() // 压缩 js
   )
 }
 
-module.exports = config
+export default webpackConfig

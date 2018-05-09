@@ -8,8 +8,8 @@ class Main extends React.Component {
 
   render() {
     return (
-      <div >
-        ok
+      <div>
+        <p>ok</p>
         <button onClick={()=>console.log('ok')}>test</button>
       </div>
     )

@@ -1,0 +1,61 @@
+import path from 'path'
+import express from 'express'
+import chalk from 'chalk'
+
+import webpack from 'webpack'
+import webpackDevMiddleware from 'webpack-dev-middleware'
+import webpackHotMiddleware from 'webpack-hot-middleware'
+
+import webpackConfig from '../webpack.config'
+import { config } from '../../package.json'
+
+webpackConfig.devtool = 'source-map'
+
+// 热加载
+const hotclient = ['webpack-hot-middleware/client?noInfo=true&reload=true']
+if (Array.isArray(webpackConfig.entry)) {
+  Object.keys(webpackConfig.entry).forEach((name) => {
+    const value = webpackConfig.entry[name]
+    if (Array.isArray(value)) {
+      value.unshift(...hotclient)
+    } else {
+      webpackConfig.entry[name] = [...hotclient, value]
+    }
+  })
+} else {
+  webpackConfig.entry = [...hotclient, webpackConfig.entry]
+}
+
+const webpackCompiler = webpack(webpackConfig)
+
+const devMiddleware = webpackDevMiddleware(webpackCompiler, {
+  // serverSideRender: true,
+  publicPath: webpackCompiler.options.output.publicPath,
+  noInfo: true,
+  quiet: false,
+  stats: {
+    colors: true,
+    hash: false,
+    version: false,
+    timings: false, // 时间信息
+    assets: true, // 资源信息
+    builtAt: true, // 构建日期和构建时间信息
+    chunks: false,
+    children: false,
+    modules: false,
+  }
+})
+
+const hotMiddleware = webpackHotMiddleware(webpackCompiler, {
+  log: false
+})
+
+const app = express()
+app.use(devMiddleware)
+app.use(hotMiddleware)
+
+app.listen(config.port, function () {
+  process.stdout.clearLine()
+  process.stdout.cursorTo(0)
+  console.log(`dev-server at ${chalk.magenta.underline(`http://localhost:${this.address().port}`)}`)
+})
