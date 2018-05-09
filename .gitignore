@@ -1,8 +1,10 @@
 .DS_Store
 **/.DS_Store
+npm-debug.log
 
 node_modules
 .vscode/chrome
 
-dist
-npm-debug.log
+/dist
+
+
