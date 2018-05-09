@@ -5,3 +5,4 @@ node_modules
 .vscode/chrome
 
 dist
+npm-debug.log

@@ -2,15 +2,15 @@ import React from 'react'
 
 class Main extends React.Component {
 
-  componentWillMount(){
-    console.log(123)
+  componentWillMount() {
+    console.log(this)
   }
 
   render() {
     return (
       <div>
-        <p>ok222</p>
-        <button onClick={()=>console.log('ok')}>test</button>
+        <p>ok2222222333</p>
+        <button onClick={() => console.log('ok')}>test</button>
       </div>
     )
   }

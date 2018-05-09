@@ -6,14 +6,14 @@ import webpack from 'webpack'
 import webpackDevMiddleware from 'webpack-dev-middleware'
 import webpackHotMiddleware from 'webpack-hot-middleware'
 
-import webpackConfig from '../webpack.config'
-import { config } from '../../package.json'
+import webpackConfig from '../config/webpack.config'
+import { config } from '../package.json'
 
 webpackConfig.devtool = 'source-map'
 
 // 热加载
 const hotclient = ['webpack-hot-middleware/client?noInfo=true&reload=true']
-if (Array.isArray(webpackConfig.entry)) {
+if (typeof webpackConfig.entry == 'object') {
   Object.keys(webpackConfig.entry).forEach((name) => {
     const value = webpackConfig.entry[name]
     if (Array.isArray(value)) {

@@ -1,39 +1,63 @@
-import path from 'path';
-import webpack from 'webpack'
+const path = require('path')
+const webpack = require('webpack')
 
-import htmlWebpackPlugin from 'html-webpack-plugin'
-import ProgressBarPlugin from 'progress-bar-webpack-plugin'
+const htmlWebpackPlugin = require('html-webpack-plugin')
+const ProgressBarPlugin = require('progress-bar-webpack-plugin')
 
-import { config, main } from '../package.json'
+const { config, main } = require('../package.json')
+
 
 const { NODE_ENV } = process.env
 const { source, dist, template } = config
 const appPath = path.join(__dirname, `../${source}`)
+
+
 console.log(NODE_ENV, appPath)
-// 通用配置
+
+
 const webpackConfig = {
   mode: NODE_ENV,
-  // target: 'web',
+  target: 'web',
   // publicPath: '/',
-  entry: path.join(__dirname, `../${source}/${main}`),
+  entry: path.join(__dirname, `../${main}`),
   output: {
     path: path.join(__dirname, `../${dist}`),
-    filename: 'bundle.js'
+    // chunkFilename: '[name].[chunkhash].chunk.js',
+    // filename: '[name].bundle.js',
+    // crossOriginLoading: 'anonymous',
   },
+
+
 
   module: {
     rules: [
       {
         test: /\.(js|jsx)$/,
         include: appPath,
-        loader: 'babel-loader'
+        use: NODE_ENV == 'production' ? [
+          {
+            loader: 'bundle-loader',
+            options: {
+              lazy: true,
+              name: 'js/[name]'
+            }
+          },
+          { loader: 'babel-loader' },
+        ] : { loader: 'babel-loader' }
       },
       {
         test: /\.css$/,
         include: appPath,
         use: [
-          'style-loader',
-          'css-loader',
+          // 'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              limit: 1024,
+              name: 'styles/[name].[ext]'
+            }
+          }
+
         ]
       },
       {
@@ -44,7 +68,7 @@ const webpackConfig = {
             loader: 'url-loader',
             options: {
               limit: 1024,
-              name: '[name].[ext]'
+              name: 'images/[name].[ext]'
             }
           }
         ]
@@ -55,8 +79,8 @@ const webpackConfig = {
     new ProgressBarPlugin(),
     new htmlWebpackPlugin({
       // title: 'title',
-      template: path.join(__dirname, `../${source}/${template}`),
-      filename: template,
+      template: `${appPath}/${template}`,
+      filename: 'index.html',
     }),
   ],
 }
@@ -71,9 +95,9 @@ if (NODE_ENV == 'development') {
 } else if (NODE_ENV == 'production') {
   // 生产环境配置
   console.log('生产环境')
-  config.plugins.push(
-    new webpack.optimize.UglifyJsPlugin() // 压缩 js
-  )
+  // webpackConfig.plugins.push(
+  //   new webpack.optimize.UglifyJsPlugin() // 压缩 js
+  // )
 }
 
-export default webpackConfig
+module.exports = webpackConfig
