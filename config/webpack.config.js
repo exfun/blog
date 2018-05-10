@@ -22,8 +22,9 @@ const webpackConfig = {
   entry: path.join(__dirname, `../${main}`),
   output: {
     path: path.join(__dirname, `../${dist}`),
-    // chunkFilename: '[name].[chunkhash].chunk.js',
-    // filename: '[name].bundle.js',
+    chunkFilename: 'js/[name].js',
+    // publicPath: '',
+    filename: 'js/[name].js',
     // crossOriginLoading: 'anonymous',
   },
 
@@ -32,18 +33,22 @@ const webpackConfig = {
   module: {
     rules: [
       {
-        test: /\.(js|jsx)$/,
+        test: /\.js[x]?$/,
         include: appPath,
-        use: NODE_ENV == 'production' ? [
-          {
-            loader: 'bundle-loader',
-            options: {
-              lazy: true,
-              name: 'js/[name]'
-            }
-          },
-          { loader: 'babel-loader' },
-        ] : { loader: 'babel-loader' }
+        // loaders: ['bundle-loader?lazy&name=[name]', 'babel-loader']
+        loaders: ['babel-loader']
+        // use: NODE_ENV == 'production' ? [
+        // use: [
+        //   {
+        //     loader: 'bundle-loader',
+        //     options: {
+        //       lazy: true,
+        //       name: '[name]'
+        //     }
+        //   },
+        //   { loader: 'babel-loader' },
+        // ]
+        // ] : { loader: 'babel-loader' }
       },
       {
         test: /\.css$/,
@@ -54,7 +59,7 @@ const webpackConfig = {
             loader: 'css-loader',
             options: {
               limit: 1024,
-              name: 'styles/[name].[ext]'
+              name: 'styles/[name]'
             }
           }
 
