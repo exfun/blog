@@ -10,6 +10,7 @@
     "build2": "cross-env NODE_ENV=production webpack --config config/webpack.config.js"
   },
   "config": {
+    "publicPath": "",
     "port": "2333",
     "source": "src",
     "dist": "dist",
