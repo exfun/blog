@@ -3,6 +3,8 @@ const webpack = require('webpack')
 
 const htmlWebpackPlugin = require('html-webpack-plugin')
 const ProgressBarPlugin = require('progress-bar-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+
 
 const { config, main } = require('../package.json')
 
@@ -22,9 +24,9 @@ const webpackConfig = {
   entry: path.join(__dirname, `../${main}`),
   output: {
     path: path.join(__dirname, `../${dist}`),
-    chunkFilename: 'js/[name].js',
     // publicPath: '',
-    filename: 'js/[name].js',
+    filename: 'js/[name]-[hash:7].js',
+    chunkFilename: 'js/[id]-[chunkhash:7].js',
     // crossOriginLoading: 'anonymous',
   },
 
@@ -35,34 +37,18 @@ const webpackConfig = {
       {
         test: /\.js[x]?$/,
         include: appPath,
-        // loaders: ['bundle-loader?lazy&name=[name]', 'babel-loader']
-        loaders: ['babel-loader']
-        // use: NODE_ENV == 'production' ? [
-        // use: [
-        //   {
-        //     loader: 'bundle-loader',
-        //     options: {
-        //       lazy: true,
-        //       name: '[name]'
-        //     }
-        //   },
-        //   { loader: 'babel-loader' },
-        // ]
-        // ] : { loader: 'babel-loader' }
+        loader: ['babel-loader']
       },
       {
-        test: /\.css$/,
-        include: appPath,
+        test: /\.(sass|scss)$/,
         use: [
-          // 'style-loader',
+          MiniCssExtractPlugin.loader,
           {
-            loader: 'css-loader',
-            options: {
-              limit: 1024,
-              name: 'styles/[name]'
-            }
+            loader: "css-loader"
+          },
+          {
+            loader: "sass-loader"
           }
-
         ]
       },
       {
@@ -86,6 +72,10 @@ const webpackConfig = {
       // title: 'title',
       template: `${appPath}/${template}`,
       filename: 'index.html',
+    }),
+    new MiniCssExtractPlugin({
+      filename: 'css/[name]-[hash:7].css',
+      chunkFilename: "css/[id]-[chunkhash:7].css"
     }),
   ],
 }

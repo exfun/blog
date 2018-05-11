@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+import './style.scss'
+
 // import Bundle from './bundle.js';
 // import App from 'bundle-loader?lazy!./App'
 
@@ -18,8 +20,7 @@ import ReactDOM from 'react-dom';
 
 // ReactDOM.render(<A />, root)
 
-import(/* webpackChunkName: "app" */ './App').then(res => {
-  console.log(res)
-})
+const App = import(/* webpackChunkName: "app" */ './App').then(x => x)
 
+console.log(App)
 // console.log(123)
