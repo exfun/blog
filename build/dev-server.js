@@ -8,11 +8,15 @@ import webpackHotMiddleware from 'webpack-hot-middleware'
 
 import webpackConfig from '../config/webpack.config'
 import { config } from '../package.json'
+import { bigFont } from './utils'
 
 webpackConfig.devtool = 'source-map'
 
 // 热加载
-const hotclient = ['webpack-hot-middleware/client?noInfo=true&reload=true']
+const hotclient = [
+  'webpack-hot-middleware/client?noInfo=true&reload=true',
+  // "css-hot-loader?fileMap='../css/{fileName}"
+]
 if (typeof webpackConfig.entry == 'object') {
   Object.keys(webpackConfig.entry).forEach((name) => {
     const value = webpackConfig.entry[name]
@@ -57,5 +61,6 @@ app.use(hotMiddleware)
 app.listen(config.port, function () {
   process.stdout.clearLine()
   process.stdout.cursorTo(0)
-  console.log(`dev-server at ${chalk.magenta.underline(`http://localhost:${this.address().port}`)}`)
+  console.log(chalk.yellowBright(bigFont.DEV))
+  console.log(`=> dev-server at ${chalk.magenta.underline(`http://localhost:${this.address().port}`)}`)
 })

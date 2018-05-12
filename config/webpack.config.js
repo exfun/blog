@@ -4,6 +4,7 @@ const webpack = require('webpack')
 const htmlWebpackPlugin = require('html-webpack-plugin')
 const ProgressBarPlugin = require('progress-bar-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
 
 const { config, main } = require('../package.json')
@@ -40,9 +41,21 @@ const webpackConfig = {
         loader: ['babel-loader']
       },
       {
+        test: /\.(css)$/,
+        use: [
+          'css-hot-loader',
+          MiniCssExtractPlugin.loader,
+          {
+            loader: "css-loader"
+          }
+        ]
+      },
+      {
         test: /\.(sass|scss)$/,
         use: [
-          MiniCssExtractPlugin.loader,
+          'css-hot-loader',
+          // dev:样式放标签 ， build：样式抽文件
+          NODE_ENV == 'development' ? 'style-loader' : MiniCssExtractPlugin.loader,
           {
             loader: "css-loader"
           },
@@ -66,6 +79,7 @@ const webpackConfig = {
       }
     ]
   },
+
   plugins: [
     new ProgressBarPlugin(),
     new htmlWebpackPlugin({
@@ -78,21 +92,27 @@ const webpackConfig = {
       chunkFilename: "css/[id]-[chunkhash:7].css"
     }),
   ],
+
+  optimization: {},
 }
 
 if (NODE_ENV == 'development') {
   // 开花环境配置
-  console.log('开发环境')
   webpackConfig.plugins.push(
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
   )
 } else if (NODE_ENV == 'production') {
   // 生产环境配置
-  console.log('生产环境')
-  // webpackConfig.plugins.push(
-  //   new webpack.optimize.UglifyJsPlugin() // 压缩 js
-  // )
+  webpackConfig.plugins.push(
+    new UglifyJsPlugin({
+      uglifyOptions: {
+        compress: {
+          drop_console: true, // 删除log
+        },
+      }
+    })
+  )
 }
 
 module.exports = webpackConfig

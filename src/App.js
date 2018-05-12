@@ -1,19 +1,18 @@
 import React from 'react'
 
-class Main extends React.Component {
+export default class Main extends React.Component {
 
-  componentWillMount() {
+  constructor(){
+    super()
     console.log(this)
   }
 
-  render() {
-    return (
+  render(){
+    return(
       <div>
-        <p>ok2222222333</p>
-        <button onClick={() => console.log('ok')}>test</button>
+        ok
       </div>
     )
   }
 
-}
-export default Main
+} // class end
