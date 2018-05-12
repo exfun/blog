@@ -28,7 +28,6 @@ const webpackConfig = {
     // publicPath: '',
     filename: 'js/[name]-[hash:7].js',
     chunkFilename: 'js/[id]-[chunkhash:7].js',
-    // crossOriginLoading: 'anonymous',
   },
 
 
