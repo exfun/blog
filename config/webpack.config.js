@@ -40,16 +40,6 @@ const webpackConfig = {
         loader: ['babel-loader']
       },
       {
-        test: /\.(css)$/,
-        use: [
-          'css-hot-loader',
-          MiniCssExtractPlugin.loader,
-          {
-            loader: "css-loader"
-          }
-        ]
-      },
-      {
         test: /\.(sass|scss)$/,
         use: [
           'css-hot-loader',
