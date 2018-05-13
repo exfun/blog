@@ -7,9 +7,10 @@ export default function asyncComponent(importComponent) {
       this.state = { comp: null };
     }
 
-    async componentDidMount() {
-      const { default: comp } = await importComponent();
-      this.setState({ comp });
+    componentDidMount() {
+      importComponent().then(({ default: comp }) => {
+        this.setState({ comp });
+      });
     }
 
     render() {

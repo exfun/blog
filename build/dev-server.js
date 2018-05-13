@@ -35,6 +35,7 @@ const webpackCompiler = webpack(webpackConfig)
 const devMiddleware = webpackDevMiddleware(webpackCompiler, {
   // serverSideRender: true,
   publicPath: webpackCompiler.options.output.publicPath,
+  outputPath: path.resolve(__dirname, '../middleware'),
   noInfo: true,
   quiet: false,
   stats: {
@@ -57,6 +58,10 @@ const hotMiddleware = webpackHotMiddleware(webpackCompiler, {
 const app = express()
 app.use(devMiddleware)
 app.use(hotMiddleware)
+
+app.get('*', function (request, response) {
+  response.sendFile(path.resolve(__dirname, '../middleware/index.html'))
+})
 
 app.listen(config.port, function () {
   process.stdout.clearLine()

@@ -6,9 +6,7 @@ const ProgressBarPlugin = require('progress-bar-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
-
 const { config, main } = require('../package.json')
-
 
 const { NODE_ENV } = process.env
 const { source, dist, template } = config
@@ -16,7 +14,6 @@ const appPath = path.join(__dirname, `../${source}`)
 
 
 console.log(NODE_ENV, appPath)
-
 
 const webpackConfig = {
   mode: NODE_ENV,
@@ -29,7 +26,6 @@ const webpackConfig = {
     filename: 'js/[name]-[hash:7].js',
     chunkFilename: 'js/[id]-[chunkhash:7].js',
   },
-
 
 
   module: {
