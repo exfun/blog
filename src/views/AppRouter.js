@@ -14,43 +14,45 @@ export default class AppRouter extends React.Component {
   }
 
   creatRoute(routeConfig, i = 0) {
-    const { key, path, component, children, params = {} } = routeConfig
+    const { key = i, path, component: Comp, children, params = {} } = routeConfig
 
-    return <Route key={key} path={path} render={props => {
-      const Comp = component
-      return <Comp {...props} params={params} children={(match, a) => {
-        if (children) {
-          return (
-            <Router>
-              {children.map(this.creatRoute)}
-            </Router>
-          )
-        }
-      }} />
-    }} />
+    if (children) {
+      return (
+        <Router key={key} exact>
+          <React.Fragment>
+            {/* <Route key={key} path={path} render={props => <Comp {...routeConfig} />} /> */}
+            {/* <Switch> */}
+            {children.map(this.creatRoute)}
+            {/* </Switch> */}
+          </React.Fragment>
+        </Router>
+      )
+    } else {
+      return <Route exact key={key} path={path} render={props => <Comp {...routeConfig} />} />
+    }
   }
 
   render() {
-
-    return (
-      <Router>
-        <Switch>
-          {this.creatRoute(pageRoutes)}
-          {/* <Route key={key || i} path={path} render={props => {
-            const Comp = component
-            return <Comp {...props} params={params} />
-          }} />
-          {pageRoutes.children && pageRoutes.children.map(({ key, path, component, params = {} }, i) => {
-            console.log(path)
-            return <Route key={key || i} path={path} render={props => {
-              const Comp = component
-              return <Comp {...props} params={params} />
-            }} />
-          })} */}
-          {/* <PageRoute component={NoMatch} type="404" /> */}
-        </Switch>
-      </Router>
-    )
+    return this.creatRoute(pageRoutes)
+    // return (
+    //   <Router>
+    //     <Switch>
+    //       {this.creatRoute(pageRoutes)}
+    //       {/* <Route key={key || i} path={path} render={props => {
+    //         const Comp = component
+    //         return <Comp {...props} params={params} />
+    //       }} />
+    //       {pageRoutes.children && pageRoutes.children.map(({ key, path, component, params = {} }, i) => {
+    //         console.log(path)
+    //         return <Route key={key || i} path={path} render={props => {
+    //           const Comp = component
+    //           return <Comp {...props} params={params} />
+    //         }} />
+    //       })} */}
+    //       {/* <PageRoute component={NoMatch} type="404" /> */}
+    //     </Switch>
+    //   </Router>
+    // )
   }
 
 

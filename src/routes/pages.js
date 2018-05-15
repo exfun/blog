@@ -1,13 +1,16 @@
 import React from 'react'
 import { asyncImport } from '../utils'
 
-const exact = true
-
 const route = {
   path: '/',
-  component: asyncImport(() => import('../views/Home')),
-  params: { name: 'home' },
+  // component: asyncImport(() => import('../views/Home')),
+  // params: { name: 'home' },
   children: [
+    {
+      path: '/',
+      component: asyncImport(() => import('../views/Home')),
+      params: { name: 'home' }
+    },
     {
       path: '/page1',
       component: asyncImport(() => import('../views/Page1')),
