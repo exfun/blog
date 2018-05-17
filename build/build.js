@@ -9,7 +9,7 @@ import { clearDir, bigFont } from './utils'
 
 console.log(chalk.yellowBright('=> 清空 dist'))
 clearDir(path.join(__dirname, '../dist'))
-console.log(chalk.yellowBright('=> 已清空'))
+console.log(chalk.yellowBright('=> dist 已清空'))
 
 webpack(webpackConfig, (err, stats) => {
   if (err) {
