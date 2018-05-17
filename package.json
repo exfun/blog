@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "cross-env NODE_ENV=production babel-node build/build.js",
     "dev": "cross-env NODE_ENV=development babel-node build/dev-server.js",
-    "build2": "cross-env NODE_ENV=production webpack --config config/webpack.config.js"
+    "upload:github": "cross-env UPLOAD_ENV=github babel-node build/upload.js"
   },
   "config": {
     "publicPath": "",
