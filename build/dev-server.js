@@ -59,6 +59,11 @@ const app = express()
 app.use(devMiddleware)
 app.use(hotMiddleware)
 
+// app.get('*', function (request, response) {
+//   // response.sendFile(path.resolve(__dirname, '//index.html'))
+//   response.sendFile('//index.html')
+// })
+
 app.listen(config.port, function () {
   process.stdout.clearLine()
   process.stdout.cursorTo(0)
