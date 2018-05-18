@@ -46,8 +46,8 @@ function uploadTo(uploadOptions) {
     })
     console.log('同步执行完成')
 
-  }).catch(() => {
-    console.log(chalk.redBright('=> 编译失败，上传终止'))
+  }).catch((err) => {
+    console.log(chalk.redBright('=> 编译失败，上传终止\n' + err))
   })
 }
 
