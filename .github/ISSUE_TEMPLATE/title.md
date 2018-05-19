@@ -1,7 +1,7 @@
 ---
 name: title
-about: subtitle
+about: 个人博客 issues ，请勿提交
 
 ---
 
-个人博客 issues ，请勿提交
+
