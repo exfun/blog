@@ -6,8 +6,7 @@ const uploadConfig = {
   },
   coding: {
     cname: 'blog.lanten.me',
-    https: 'https://github.com/lanten/blog.git',
-    branch: 'gh-pages',
+    https: '',
   },
   cloud: {
     cname: 'blog.lanten.me',
