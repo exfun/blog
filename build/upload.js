@@ -3,7 +3,7 @@ import path from 'path'
 import { exec, execSync } from 'child_process'
 import { prompt } from 'inquirer'
 import chalk from 'chalk'
-
+import { clearDir } from './utils'
 
 import uploadConfig from '../config/upload.config'
 import packageConfig from '../package.json'
@@ -81,7 +81,7 @@ function gitCommit({ branch = '', https }, name) {
   // Git 添加文件
   syncExec('git add .', 'Git 添加文件')
   // Git 添加 Commit
-  syncExec('git commit -m "commit by node"', 'Git 添加 Commit')
+  syncExec(`git commit -m "commit by node [${new Date()}]"`, 'Git 添加 Commit')
 
   if (branch) {
     // Git 创建分支
@@ -93,9 +93,12 @@ function gitCommit({ branch = '', https }, name) {
   // Git 执行推送
   syncExec(`git remote add origin ${https}`, `Git 推送到 ${name} `)
   // Git 执行同步（强制）
+  console.log(chalk.yellowBright(`=> 正在同步到${chalk.underline(https)}....`))
   syncExec(`git push -u origin ${branch} -f`, `Git 同步到 ${name} `)
+  // 清除 .git 文件夹
+  clearDir(inputPath + '/.git', true)
+  console.log(chalk.greenBright('=> gitCommit 同步执行完成'))
 
-  console.log(chalk.greenBright('gitCommit 同步执行完成'))
 }
 
 /**

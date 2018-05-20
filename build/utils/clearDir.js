@@ -7,9 +7,9 @@ const fs = require('fs')
  * @param {String} path 要清空的文件夹路径
  * @param {Boolean} delDir 清空完成后是否删除文件夹
  * @param {Boolean} creatDir 如果不存在,是否创建
- * @param {Boolean} log 是否输出日志 (默认为 true)
+ * @param {Boolean} log 是否输出日志
  */
-function clearDir(path, delDir, creatDir, log = true) {
+function clearDir(path, delDir, creatDir, log) {
   let files = []
 
   if (fs.existsSync(path)) {
