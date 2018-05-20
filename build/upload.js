@@ -81,7 +81,7 @@ function gitCommit({ branch = '', https }, name) {
   // Git 添加文件
   syncExec('git add .', 'Git 添加文件')
   // Git 添加 Commit
-  syncExec(`git commit -m "commit by node [${new Date()}]"`, 'Git 添加 Commit')
+  syncExec(`git commit -m "commit by node [${Date.now()}]"`, 'Git 添加 Commit')
 
   if (branch) {
     // Git 创建分支
@@ -97,7 +97,7 @@ function gitCommit({ branch = '', https }, name) {
   syncExec(`git push -u origin ${branch} -f`, `Git 同步到 ${name} `)
   // 清除 .git 文件夹
   clearDir(inputPath + '/.git', true)
-  console.log(chalk.greenBright('=> gitCommit 同步执行完成'))
+  console.log(chalk.greenBright(`=> gitCommit 同步执行完成 [${Date.now()}]`))
 
 }
 
