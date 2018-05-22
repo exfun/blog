@@ -1,13 +1,22 @@
-const config = {
+const githubConfig = {
   username: 'lanten',
-  repo: 'blog'
+  repo: 'blog',
+
+  host: 'https://api.github.com',
+  method: 'GET',
+  accept: 'application/vnd.github.v3+json', // 默认使用 v3 api
 }
 
-const { username, repo } = config
+const { host, username, repo } = githubConfig
 
-let api = {
-  ...config,
-  getIssues: `/repos/${username}/${repo}/issues`
+let githubApi = {
+  githubConfig,
+
+  // 获取 issues
+  getIssues: {
+    url: `/repos/${username}/${repo}/issues`,
+    accept: 'application/vnd.github.symmetra-preview+json',
+  },
 }
 
-module.exports = api
+export default githubApi
