@@ -5,6 +5,7 @@ import chalk from 'chalk'
 import webpack from 'webpack'
 import webpackDevMiddleware from 'webpack-dev-middleware'
 import webpackHotMiddleware from 'webpack-hot-middleware'
+import proxy from 'http-proxy-middleware'
 
 import webpackConfig from '../config/webpack.config'
 import { config } from '../package.json'
@@ -59,10 +60,9 @@ const app = express()
 app.use(devMiddleware)
 app.use(hotMiddleware)
 
-// app.get('*', function (request, response) {
-//   // response.sendFile(path.resolve(__dirname, '//index.html'))
-//   response.sendFile('//index.html')
-// })
+if (config.proxy) {
+  app.use('/', proxy({ target: config.proxy, changeOrigin: true }))
+}
 
 app.listen(config.port, function () {
   process.stdout.clearLine()

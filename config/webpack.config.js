@@ -19,7 +19,13 @@ const webpackConfig = {
   mode: NODE_ENV,
   target: 'web',
   // publicPath: '/',
-  entry: path.join(__dirname, `../${main}`),
+  entry: `${appPath}/index.js`,
+  resolve: {
+    alias: {
+      // api: `${process.cwd()}/api`
+    },
+    modules: [process.cwd(), "node_modules"]
+  },
   output: {
     path: path.join(__dirname, `../${dist}`),
     // publicPath: '',
@@ -76,6 +82,9 @@ const webpackConfig = {
       filename: 'css/[name]-[hash:7].css',
       chunkFilename: "css/[id]-[chunkhash:7].css"
     }),
+    new webpack.ProvidePlugin({
+      api: 'api'
+    })
   ],
 
   optimization: {},
