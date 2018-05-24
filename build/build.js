@@ -9,7 +9,7 @@ import { clearDir, bigFont } from './utils'
 
 const { BUILD_ENV } = process.env
 
-function build({ hideLog }) {
+function build({ hideLog = false } = {}) {
   return new Promise((resolve, reject) => {
     console.log(chalk.yellowBright('=> 清空 dist'))
     clearDir(path.join(__dirname, '../dist'))

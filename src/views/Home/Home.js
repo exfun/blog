@@ -4,15 +4,15 @@ export default class Main extends React.Component {
 
   componentDidMount() {
 
-    api.request('getIssues', {}).then(res => {
-      console.log(res)
-    })
+    // api.request('getIssues', {}).then(res => {
+    //   console.log(res)
+    // })
 
   }
 
   render() {
     return (
-      <div>
+      <div >
         111
         {this.props.params.name}
       </div>

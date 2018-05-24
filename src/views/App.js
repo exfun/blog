@@ -12,7 +12,7 @@ export default class Main extends React.Component {
   render() {
     return (
       <div id="app">
-        <p>OjbK</p>
+        <p>---</p>
         <AppRouter />
       </div>
     )

@@ -1,6 +1,6 @@
 const uploadConfig = {
   github: {
-    cname: 'www.lanten.me',
+    cname: 'blog.lanten.me',
     https: 'https://github.com/lanten/blog.git',
     branch: 'gh-pages',
   },
