@@ -116,13 +116,12 @@ function uploadToFtp(ftpConfig) {
   })
 
   ftpClient.on('ready', (res) => {
-    console.log('ready')
-    // console.log(chalk.greenBright(`=> 连接 ${name} 成功`))
-    // ftpClient.list((err, list) => {
-    //   console.log(err, list)
-    // })
+    console.log(chalk.greenBright(`=> 连接 ${name} 成功`))
+    ftpClient.list((err, list) => {
+      console.log(err, list)
+    })
 
-    // ftpClient.end()
+    ftpClient.end()
   })
 
 }
