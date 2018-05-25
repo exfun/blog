@@ -20,7 +20,7 @@ export function request(key, params, options = {}) {
     method: method,
     headers: {
       'Accept': accept,
-      // 'Content-Type': 'application/json',
+      'content-type': 'application/json'
     },
     body: params,
   }

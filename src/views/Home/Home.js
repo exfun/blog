@@ -4,9 +4,9 @@ export default class Main extends React.Component {
 
   componentDidMount() {
 
-    // api.request('getIssues', {}).then(res => {
-    //   console.log(res)
-    // })
+    api.request('getIssues', {}).then(res => {
+      console.log(res)
+    })
 
   }
 

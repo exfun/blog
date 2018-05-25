@@ -1,3 +1,8 @@
+/**
+ * github API 默认使用 V3
+ * https://developer.github.com/v3/
+ */
+
 const githubConfig = {
   username: 'lanten',
   repo: 'blog',
