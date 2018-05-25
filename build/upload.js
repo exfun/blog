@@ -1,8 +1,10 @@
 import fs from 'fs'
 import path from 'path'
+
+import chalk from 'chalk'
+import Ftp from 'ftp'
 import { exec, execSync } from 'child_process'
 import { prompt } from 'inquirer'
-import chalk from 'chalk'
 import { clearDir } from './utils'
 
 import uploadConfig from '../config/upload.config'
@@ -14,22 +16,32 @@ const { config: { dist } } = packageConfig
 const rootPath = process.cwd()
 const inputPath = path.resolve(rootPath, dist)
 
-console.log(rootPath, inputPath)
-
 if (!UPLOAD_ENV) {
   const keys = Object.keys(uploadConfig)
   prompt({
     type: 'list',
     name: 'env',
-    message: chalk.yellowBright(`\n\n=> 选择编译到哪个环境?`),
-    choices: keys,
+    message: chalk.yellowBright(`\n=> 选择编译到哪个环境?`),
+    choices: ['FTP', ...keys],
     default: keys[0],
-  }).then(({ env }) => uploadTo(uploadConfig[env], env))
+  }).then(({ env }) => {
+    if (env == 'FTP') {
+      selectFtp()
+    } else {
+      uploadToPages(uploadConfig[env], env)
+    }
+  })
 } else {
-  uploadTo(uploadConfig[UPLOAD_ENV])
+  uploadToPages(uploadConfig[UPLOAD_ENV])
 }
 
-async function uploadTo(uploadOptions, name) {
+/**
+ * 上传到 pages
+ * @param {Object} uploadOptions 
+ * @param {String} name 
+ */
+async function uploadToPages(uploadOptions, name) {
+  if (!uploadOptions) return console.log(chalk.redBright(`没有找到 ${name} 相关的配置,请检查 build/config.upload.js`))
   const { branch } = uploadOptions
 
   // 上传分支确认
@@ -37,7 +49,7 @@ async function uploadTo(uploadOptions, name) {
     const confirm = await prompt({
       type: 'confirm',
       name: 'env',
-      message: chalk.yellowBright(`\n\n=> 没有指定分支，是否继续？\n`),
+      message: chalk.yellowBright(`\n=> 没有指定分支，是否继续？\n`),
       default: false,
     }).then(({ env }) => env)
 
@@ -45,6 +57,201 @@ async function uploadTo(uploadOptions, name) {
   }
 
   webpackBuild(uploadOptions, name)
+}
+
+/**
+ * 选择要上传的 FTP 
+ */
+function selectFtp() {
+  const { ftpDefault, ftpList } = getFtpConfig()
+  const choicesKeys = ftpList.map(res => res.name || res.host)
+
+  prompt({
+    type: 'list',
+    name: 'env',
+    message: chalk.yellowBright(`\n=> 选择一个 FTP 服务器`),
+    choices: ['- 添加/修改', '- 删除', ...choicesKeys],
+    default: ftpDefault || choicesKeys[0],
+  }).then(({ env }) => {
+    switch (env) {
+      case '- 添加/修改':
+        addFtpList()
+        break;
+
+      case '- 删除':
+        removeFtpList()
+        break;
+
+      default:
+        const ftpIndex = choicesKeys.indexOf(env)
+        if (ftpIndex >= 0 && ftpList[ftpIndex]) {
+          uploadToFtp(ftpList[ftpIndex])
+        } else {
+          console.log(chalk.redBright('=> 好像有点不对劲'))
+        }
+        break;
+    }
+  })
+}
+
+/**
+ * 上传到 FTP
+ * @param {Object} ftpConfig 
+ */
+function uploadToFtp(ftpConfig) {
+  console.log(ftpConfig)
+  const ftpClient = new Ftp()
+  const { host, user, port, password, name } = ftpConfig
+
+  // 创建 FTP 连接
+  ftpClient.connect({ host, user, port, password })
+  console.log(chalk.yellowBright(`=> 正在连接 ${name}`))
+
+  ftpClient.on('greeting', res => {
+    console.log('问候语', res)
+  })
+
+  ftpClient.on('error', res => {
+    console.log('出错', res)
+  })
+
+  ftpClient.on('ready', (res) => {
+    console.log('ready')
+    // console.log(chalk.greenBright(`=> 连接 ${name} 成功`))
+    // ftpClient.list((err, list) => {
+    //   console.log(err, list)
+    // })
+
+    // ftpClient.end()
+  })
+
+}
+
+/**
+ * 添加 FTP 服务器
+ */
+async function addFtpList() {
+  let host, port, user, password, name
+  await prompt({
+    type: 'input',
+    name: 'str',
+    message: chalk.yellowBright(`\n=> 请输入.FTP.地址`),
+  }).then(res => host = res.str)
+
+  await prompt({
+    type: 'input',
+    name: 'str',
+    default: 21,
+    message: chalk.yellowBright(`\n=> 请输入.FTP.端口号`),
+  }).then(res => port = res.str)
+
+  await prompt({
+    type: 'input',
+    name: 'str',
+    message: chalk.yellowBright(`\n=> 请输入.FTP.用户名`),
+  }).then(res => user = res.str)
+
+  await prompt({
+    type: 'password',
+    name: 'str',
+    message: chalk.yellowBright(`\n=> 请输入.FTP.密码`),
+  }).then(res => password = res.str)
+
+  await prompt({
+    type: 'input',
+    name: 'str',
+    default: host,
+    message: chalk.yellowBright(`\n=> 请输入.FTP.名称`),
+  }).then(res => name = res.str)
+
+  if (!host || !user || !password || !name) return console.log(chalk.redBright('=> 填写错误!'))
+
+  const newFtp = { host, port, user, password, name }
+  const ftpConfig = getFtpConfig()
+  const { ftpList } = ftpConfig
+  const ftpNameIndex = ftpList.findIndex(res => res.name == name)
+
+  if (ftpNameIndex >= 0) {
+    await prompt({
+      type: 'confirm',
+      name: 'env',
+      default: true,
+      message: chalk.yellowBright(`\n=> 已存在相同名称的配置,原配置将被修改,是否继续?`),
+    }).then(({ env }) => {
+      if (env) ftpList[ftpNameIndex] = newFtp
+    })
+  } else {
+    ftpList.push(newFtp)
+  }
+
+  fs.writeFile(`${rootPath}/config/ftp.config.json`, JSON.stringify(ftpConfig), err => {
+    if (!err) {
+      console.log(chalk.greenBright('=> 保存配置成功'))
+    } else {
+      console.log(chalk.redBright('=> 保存配置失败\n' + err))
+    }
+  })
+}
+
+/**
+ * 删除 FTP 服务器
+ */
+async function removeFtpList() {
+  const ftpConfig = getFtpConfig()
+  const { ftpList } = ftpConfig
+
+  const choices = ftpList.map(res => res.name || res.host)
+  prompt({
+    type: 'list',
+    name: 'env',
+    message: chalk.yellowBright(`\n=> 要删除哪个?`),
+    choices,
+  }).then(({ env }) => {
+    const ftpIndex = ftpList.findIndex(({ name, host }) => {
+      return (env == name || env == host)
+    })
+
+    if (ftpIndex >= 0) {
+      prompt({
+        type: 'confirm',
+        name: 'env',
+        default: true,
+        message: chalk.yellowBright(`\n=> 即将删除${ftpList[ftpIndex].name || ftpList[ftpIndex].host},是否继续?`),
+      }).then(({ env }) => {
+        if (!env) return console.log(chalk.yellowBright('=> 取消删除'))
+        ftpList.splice(ftpIndex, 1)
+        fs.writeFile(`${rootPath}/config/ftp.config.json`, JSON.stringify(ftpConfig), err => {
+          if (!err) {
+            console.log(chalk.greenBright('=> 删除成功'))
+          } else {
+            console.log(chalk.redBright('=> 删除失败\n' + err))
+          }
+        })
+      })
+    } else {
+      console.log(chalk.redBright('=> 好像有点不对劲'))
+    }
+  })
+}
+
+/**
+ * 获取 FTP 配置信息
+ */
+function getFtpConfig() {
+  let ftpConfig = []
+  try {
+    ftpConfig = require(`${rootPath}/config/ftp.config.json`)
+  } catch (error) {
+    console.log(chalk.yellowBright('=> 没有找到 ftp.config.json 配置文件'))
+    fs.writeFile(`${rootPath}/config/ftp.config.json`, '[]', err => {
+      if (!err) {
+        console.log(chalk.greenBright('=> 创建 ftp.config.json 配置文件成功'))
+      } else {
+        console.log(chalk.redBright('=> 创建 ftp.config.json 配置文件失败\n' + err))
+      }
+    })
+  }
+  return ftpConfig
 }
 
 /**

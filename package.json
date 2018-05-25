@@ -35,6 +35,7 @@
     "css-loader": "^0.28.11",
     "express": "^4.16.3",
     "file-loader": "^1.1.11",
+    "ftp": "^0.3.10",
     "html-webpack-plugin": "^3.2.0",
     "http-proxy-middleware": "^0.18.0",
     "inquirer": "^5.2.0",
