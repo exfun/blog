@@ -63,7 +63,7 @@ async function uploadToPages(uploadOptions, name) {
  * 选择要上传的 FTP 
  */
 function selectFtp() {
-  const { ftpDefault, ftpList } = getFtpConfig()
+  const { ftpDefault, ftpList = [] } = getFtpConfig()
   const choicesKeys = ftpList.map(res => res.name || res.host)
 
   prompt({
@@ -167,7 +167,7 @@ async function addFtpList() {
 
   const newFtp = { host, port, user, password, name }
   const ftpConfig = getFtpConfig()
-  const { ftpList } = ftpConfig
+  const { ftpList = [] } = ftpConfig
   const ftpNameIndex = ftpList.findIndex(res => res.name == name)
 
   if (ftpNameIndex >= 0) {
@@ -197,7 +197,7 @@ async function addFtpList() {
  */
 async function removeFtpList() {
   const ftpConfig = getFtpConfig()
-  const { ftpList } = ftpConfig
+  const { ftpList = [] } = ftpConfig
 
   const choices = ftpList.map(res => res.name || res.host)
   prompt({
@@ -242,7 +242,7 @@ function getFtpConfig() {
     ftpConfig = require(`${rootPath}/config/ftp.config.json`)
   } catch (error) {
     console.log(chalk.yellowBright('=> 没有找到 ftp.config.json 配置文件'))
-    fs.writeFile(`${rootPath}/config/ftp.config.json`, '[]', err => {
+    fs.writeFile(`${rootPath}/config/ftp.config.json`, '{"ftpList":[]}', err => {
       if (!err) {
         console.log(chalk.greenBright('=> 创建 ftp.config.json 配置文件成功'))
       } else {
