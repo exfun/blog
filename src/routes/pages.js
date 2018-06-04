@@ -21,6 +21,11 @@ const route = {
       component: asyncImport(() => import('../views/Home')),
       params: { name: 'page2' }
     },
+    {
+      path: '/error',
+      component: asyncImport(() => import('../views/Page1')),
+      params: { name: 'page2' }
+    },
   ]
 }
 
