@@ -2,7 +2,6 @@ import fs from 'fs'
 import path from 'path'
 
 import chalk from 'chalk'
-import Ftp from 'ftp'
 import { exec, execSync } from 'child_process'
 import { prompt } from 'inquirer'
 import { clearDir } from './utils'
@@ -10,6 +9,7 @@ import { clearDir } from './utils'
 import uploadConfig from '../config/upload.config'
 import packageConfig from '../package.json'
 import build from './build'
+import uploadToFtp from './upload-ftp'
 
 const { UPLOAD_ENV } = process.env
 const { config: { dist } } = packageConfig
@@ -56,7 +56,18 @@ async function uploadToPages(uploadOptions, name) {
     if (!confirm) return
   }
 
-  webpackBuild(uploadOptions, name)
+  webpackBuild().then(res => {
+    // 写入 CNAME
+    const { cname } = uploadOptions
+    fs.writeFile(`${inputPath}/CNAME`, cname, err => {
+      if (!err) {
+        console.log(chalk.greenBright('=> 写入 CNAME 文件成功'))
+        gitCommit(uploadOptions, name)
+      } else {
+        console.log(chalk.redBright('=> 写入 CNAME 文件失败\n' + err))
+      }
+    })
+  })
 }
 
 /**
@@ -85,7 +96,7 @@ function selectFtp() {
       default:
         const ftpIndex = choicesKeys.indexOf(env)
         if (ftpIndex >= 0 && ftpList[ftpIndex]) {
-          uploadToFtp(ftpList[ftpIndex])
+          uploadToFtp(ftpList[ftpIndex], inputPath)
         } else {
           console.log(chalk.redBright('=> 好像有点不对劲'))
         }
@@ -95,42 +106,10 @@ function selectFtp() {
 }
 
 /**
- * 上传到 FTP
- * @param {Object} ftpConfig 
- */
-function uploadToFtp(ftpConfig) {
-  console.log(ftpConfig)
-  const ftpClient = new Ftp()
-  const { host, user, port, password, name } = ftpConfig
-
-  // 创建 FTP 连接
-  ftpClient.connect({ host, user, port, password })
-  console.log(chalk.yellowBright(`=> 正在连接 ${name}`))
-
-  ftpClient.on('greeting', res => {
-    console.log('问候语', res)
-  })
-
-  ftpClient.on('error', res => {
-    console.log('出错', res)
-  })
-
-  ftpClient.on('ready', (res) => {
-    console.log(chalk.greenBright(`=> 连接 ${name} 成功`))
-    ftpClient.list((err, list) => {
-      console.log(err, list)
-    })
-
-    ftpClient.end()
-  })
-
-}
-
-/**
  * 添加 FTP 服务器
  */
 async function addFtpList() {
-  let host, port, user, password, name
+  let host, port, user, password, name, path
   await prompt({
     type: 'input',
     name: 'str',
@@ -159,13 +138,19 @@ async function addFtpList() {
   await prompt({
     type: 'input',
     name: 'str',
+    message: chalk.yellowBright(`\n=> 请输入.FTP.项目路径`),
+  }).then(res => path = res.str)
+
+  await prompt({
+    type: 'input',
+    name: 'str',
     default: host,
     message: chalk.yellowBright(`\n=> 请输入.FTP.名称`),
   }).then(res => name = res.str)
 
-  if (!host || !user || !password || !name) return console.log(chalk.redBright('=> 填写错误!'))
+  if (!host || !user || !password || !name || !path) return console.log(chalk.redBright('=> 填写错误!'))
 
-  const newFtp = { host, port, user, password, name }
+  const newFtp = { host, port, user, password, name, path }
   const ftpConfig = getFtpConfig()
   const { ftpList = [] } = ftpConfig
   const ftpNameIndex = ftpList.findIndex(res => res.name == name)
@@ -257,23 +242,12 @@ function getFtpConfig() {
  * webpack 编译
  * @param {Object} uploadOptions 
  */
-function webpackBuild(uploadOptions, name) {
-  const { cname } = uploadOptions
-  const buildStatus = build({ hideLog: true }).then(res => {
+function webpackBuild() {
+  return build({ hideLog: true }).then(res => {
     console.log(chalk.yellowBright('=> 编译完成，待上传的目录：'), chalk.underline(chalk.magentaBright(inputPath)))
-    // 写入 CNAME
-    fs.writeFile(`${inputPath}/CNAME`, cname, err => {
-      if (!err) {
-        console.log(chalk.greenBright('=> 写入 CNAME 文件成功'))
-        gitCommit(uploadOptions, name)
-      } else {
-        console.log(chalk.redBright('=> 写入 CNAME 文件失败\n' + err))
-      }
-    })
   }).catch((err) => {
     console.log(chalk.redBright('=> 编译失败，上传终止\n' + err))
   })
-
 }
 
 /**
