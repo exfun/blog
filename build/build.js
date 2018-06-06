@@ -35,10 +35,10 @@ function build({ hideLog = false } = {}) {
 
       if (stats.hasErrors() || stats.hasWarnings()) {
         console.log(chalk.redBright(bigFont.FAILED))
-        return reject(stats)
+        reject(stats)
       } else {
         if (!hideLog) console.log(chalk.greenBright(bigFont.SUCCESS))
-        return resolve(stats)
+        resolve(stats)
       }
 
     })
