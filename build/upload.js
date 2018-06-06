@@ -96,7 +96,9 @@ function selectFtp() {
       default:
         const ftpIndex = choicesKeys.indexOf(env)
         if (ftpIndex >= 0 && ftpList[ftpIndex]) {
-          uploadToFtp(ftpList[ftpIndex], inputPath)
+          webpackBuild().then(() => {
+            uploadToFtp(ftpList[ftpIndex], inputPath)
+          })
         } else {
           console.log(chalk.redBright('=> 好像有点不对劲'))
         }
