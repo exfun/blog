@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default class Main extends React.Component {
+export default class Page404 extends React.Component {
 
   componentDidMount(){
     console.log(this)

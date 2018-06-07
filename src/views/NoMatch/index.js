@@ -1,3 +1,3 @@
-import Page1 from './Page1'
+import page404 from './Page404'
 
-export default Page1
+export default page404

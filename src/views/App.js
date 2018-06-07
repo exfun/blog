@@ -14,7 +14,7 @@ export default class App extends React.Component {
   render() {
     return (
       <div id="app">
-        <Navbar ref={this.navbarRef}></Navbar>
+        <Navbar ref={this.navbarRef} appRef={this}></Navbar>
         <p>---</p>
         <Router navbarRef={this.navbarRef} />
       </div>
