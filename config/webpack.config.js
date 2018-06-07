@@ -6,12 +6,11 @@ const ProgressBarPlugin = require('progress-bar-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
-const { config, main } = require('../package.json')
+const { source, dist, template } = require('./app.config')
 
 const { NODE_ENV } = process.env
-const { source, dist, template } = config
-const appPath = path.join(__dirname, `../${source}`)
 
+const appPath = path.join(__dirname, `../${source}`)
 
 console.log(NODE_ENV, appPath)
 

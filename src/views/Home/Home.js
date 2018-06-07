@@ -1,15 +1,15 @@
 import React from 'react'
 // import api from 'api'
 
-console.log('123333', api)
-
-export default class Main extends React.Component {
+export default class Home extends React.Component {
 
   componentDidMount() {
 
     api.request('getIssues', {}).then(res => {
       console.log(res)
     })
+
+    console.log(this)
 
   }
 

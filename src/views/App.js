@@ -1,19 +1,22 @@
 import React from 'react'
 
 import Router from './Router'
+import Navbar from '../components/Navbar'
 
-export default class Main extends React.Component {
+export default class App extends React.Component {
 
   constructor() {
     super()
-    // console.log(this)
+
+    this.navbarRef = React.createRef()
   }
 
   render() {
     return (
       <div id="app">
+        <Navbar ref={this.navbarRef}></Navbar>
         <p>---</p>
-        <Router />
+        <Router navbarRef={this.navbarRef} />
       </div>
     )
   }

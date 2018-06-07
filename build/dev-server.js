@@ -8,7 +8,7 @@ import webpackHotMiddleware from 'webpack-hot-middleware'
 import proxy from 'http-proxy-middleware'
 
 import webpackConfig from '../config/webpack.config'
-import { config } from '../package.json'
+import config from '../config/app.config'
 import { bigFont } from './utils'
 
 webpackConfig.devtool = 'source-map'

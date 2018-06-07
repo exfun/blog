@@ -6,13 +6,12 @@ import { exec, execSync } from 'child_process'
 import { prompt } from 'inquirer'
 import { clearDir } from './utils'
 
+import { dist } from '../config/app.config'
 import uploadConfig from '../config/upload.config'
-import packageConfig from '../package.json'
 import build from './build'
 import uploadToFtp from './upload-ftp'
 
 const { UPLOAD_ENV } = process.env
-const { config: { dist } } = packageConfig
 const rootPath = process.cwd()
 const inputPath = path.resolve(rootPath, dist)
 

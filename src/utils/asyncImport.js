@@ -8,13 +8,16 @@ export default function asyncComponent(importComponent) {
     }
 
     componentDidMount() {
+      console.log('loading', this.props.navbarRef)
       importComponent().then(({ default: comp }) => {
-        this.setState({ comp });
+        this.setState({ comp }, () => {
+          console.log('loaded')
+        });
       });
     }
 
     render() {
-      const Comp = this.state.comp;
+      const { comp: Comp } = this.state;
       return Comp ? <Comp {...this.props} /> : null;
     }
   }

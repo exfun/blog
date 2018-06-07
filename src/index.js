@@ -8,9 +8,9 @@ import VConsole from 'vconsole'
 
 const { NODE_ENV } = process.env
 
-if (NODE_ENV == 'development') {
-  global.vConsole = new VConsole() // 微信调试
-}
+// if (NODE_ENV == 'development') {
+//   global.vConsole = new VConsole() // 微信调试
+// }
 
 const root = document.createElement('div')
 document.body.appendChild(root)
