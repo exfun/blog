@@ -13,13 +13,13 @@
     "port": "2333",
     "source": "src",
     "dist": "dist",
-    "template": "index.html",
-    "proxy": "http://www.lanten.me"
+    "template": "index.html"
   },
   "dependencies": {
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
-    "react-router-dom": "^4.2.2"
+    "react-router-dom": "^4.2.2",
+    "vconsole": "^3.2.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",

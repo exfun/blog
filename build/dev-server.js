@@ -36,7 +36,7 @@ const webpackCompiler = webpack(webpackConfig)
 const devMiddleware = webpackDevMiddleware(webpackCompiler, {
   // serverSideRender: true,
   publicPath: webpackCompiler.options.output.publicPath,
-  outputPath: path.resolve(__dirname, '../middleware'),
+  filename: path.resolve(__dirname, '../middleware'),
   noInfo: true,
   quiet: false,
   stats: {
@@ -57,16 +57,26 @@ const hotMiddleware = webpackHotMiddleware(webpackCompiler, {
 })
 
 const app = express()
+
 app.use(devMiddleware)
 app.use(hotMiddleware)
+
+app.get('*', ({ url }, res) => {
+  // const htmlFile = devMiddleware.fileSystem.readFileSync('./index.html', 'utf-8')
+  const htmlFile = devMiddleware.fileSystem.readFileSync(path.join(webpackConfig.output.path, 'index.html'))
+
+  console.log('=> 重定向', url)
+  res.writeHeader(200, { 'Content-Type': 'text/html' });
+  res.end(htmlFile);
+})
 
 if (config.proxy) {
   app.use('/', proxy({ target: config.proxy, changeOrigin: true }))
 }
 
 app.listen(config.port, function () {
-  process.stdout.clearLine()
-  process.stdout.cursorTo(0)
+  // process.stdout.clearLine()
+  // process.stdout.cursorTo(0)
   console.log(chalk.yellowBright(bigFont.DEV))
   console.log(`=> dev-server at ${chalk.magenta.underline(`http://localhost:${this.address().port}`)}`)
 })
