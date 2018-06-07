@@ -1,6 +1,6 @@
 import React from 'react'
 
-import AppRouter from './AppRouter'
+import Router from './Router'
 
 export default class Main extends React.Component {
 
@@ -13,7 +13,7 @@ export default class Main extends React.Component {
     return (
       <div id="app">
         <p>---</p>
-        <AppRouter />
+        <Router />
       </div>
     )
   }

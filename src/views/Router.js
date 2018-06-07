@@ -19,12 +19,12 @@ export default class AppRouter extends React.Component {
     if (children) {
       return (
         <Router key={key} exact>
-          <React.Fragment>
-            {/* <Route key={key} path={path} render={props => <Comp {...routeConfig} />} /> */}
-            {/* <Switch> */}
+          {/* <React.Fragment> */}
+          {/* <Route key={key} path={path} render={props => <Comp {...routeConfig} />} /> */}
+          <Switch>
             {children.map(this.creatRoute)}
-            {/* </Switch> */}
-          </React.Fragment>
+          </Switch>
+          {/* </React.Fragment> */}
         </Router>
       )
     } else {

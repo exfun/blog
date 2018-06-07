@@ -6,7 +6,11 @@ import App from './views/App'
 
 import VConsole from 'vconsole'
 
-global.vConsole = new VConsole() // 微信调试
+const { NODE_ENV } = process.env
+
+if (NODE_ENV == 'development') {
+  global.vConsole = new VConsole() // 微信调试
+}
 
 const root = document.createElement('div')
 document.body.appendChild(root)

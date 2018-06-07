@@ -59,14 +59,18 @@ async function uploadToPages(uploadOptions, name) {
   webpackBuild().then(res => {
     // 写入 CNAME
     const { cname } = uploadOptions
-    fs.writeFile(`${inputPath}/CNAME`, cname, err => {
-      if (!err) {
-        console.log(chalk.greenBright('=> 写入 CNAME 文件成功'))
-        gitCommit(uploadOptions, name)
-      } else {
-        console.log(chalk.redBright('=> 写入 CNAME 文件失败\n' + err))
-      }
-    })
+    if (cname) {
+      fs.writeFile(`${inputPath}/CNAME`, cname, err => {
+        if (!err) {
+          console.log(chalk.greenBright('=> 写入 CNAME 文件成功'))
+          gitCommit(uploadOptions, name)
+        } else {
+          console.log(chalk.redBright('=> 写入 CNAME 文件失败\n' + err))
+        }
+      })
+    } else {
+      gitCommit(uploadOptions, name)
+    }
   })
 }
 

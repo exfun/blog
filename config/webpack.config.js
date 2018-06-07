@@ -14,7 +14,6 @@ const appPath = path.join(__dirname, `../${source}`)
 
 
 console.log(NODE_ENV, appPath)
-console.log(`${process.cwd()}/api`)
 
 const webpackConfig = {
   mode: NODE_ENV,
@@ -23,9 +22,9 @@ const webpackConfig = {
   entry: `${appPath}/index.js`,
   resolve: {
     alias: {
-      'api': `${process.cwd()}/api`
+      // api: `${process.cwd()}/api`
     },
-    modules: ["node_modules", process.cwd()]
+    modules: [process.cwd(), "node_modules"]
   },
   output: {
     path: path.join(__dirname, `../${dist}`),
@@ -83,6 +82,9 @@ const webpackConfig = {
       filename: 'css/[name]-[hash:7].css',
       chunkFilename: "css/[id]-[chunkhash:7].css"
     }),
+    new webpack.ProvidePlugin({
+      api: 'api'
+    })
   ],
 
   optimization: {},

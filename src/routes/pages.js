@@ -6,26 +6,13 @@ const route = {
   // component: asyncImport(() => import('../views/Home')),
   // params: { name: 'home' },
   children: [
-    {
-      path: '/',
-      component: asyncImport(() => import('../views/Home')),
-      params: { name: 'home' }
-    },
-    {
-      path: '/page1',
-      component: asyncImport(() => import('../views/Page1')),
-      params: { name: 'page1' }
-    },
-    {
-      path: '/page2',
-      component: asyncImport(() => import('../views/Home')),
-      params: { name: 'page2' }
-    },
-    {
-      path: '/error',
-      component: asyncImport(() => import('../views/Page1')),
-      params: { name: 'page2' }
-    },
+    { path: '/', component: asyncImport(() => import('../views/Home')), params: { name: 'home' } },
+
+    { path: '/page1', component: asyncImport(() => import('../views/Home')) },
+    { path: '/page2', component: asyncImport(() => import('../views/Home')) },
+
+    // 404
+    { component: asyncImport(() => import('../views/NoMatch')) },
   ]
 }
 

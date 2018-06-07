@@ -1,6 +1,6 @@
 import githubAPI from "./github-api"
 
-export const api = { ...githubAPI }
+export const api = Object.assign({}, githubAPI)
 
 export function request(key, params, options = {}) {
   const { config = 'githubConfig' } = options

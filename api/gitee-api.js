@@ -16,12 +16,8 @@ const { host, username, repo } = giteeConfig
 
 let giteeApi = {
   giteeConfig,
-
   // 获取 issues
-  getIssues: {
-    url: `/repos/${username}/${repo}/issues`,
-    accept: 'application/vnd.github.symmetra-preview+json',
-  },
+  getIssues: `/repos/${username}/${repo}/issues`,
 }
 
 export default giteeApi
