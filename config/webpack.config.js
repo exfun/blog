@@ -6,7 +6,8 @@ const ProgressBarPlugin = require('progress-bar-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
-const { source, dist, template } = require('./dev.config')
+const { source, dist, template, template404 } = require('./dev.config')
+const { title, subtitle } = require('./app.config')
 
 const { NODE_ENV } = process.env
 
@@ -91,7 +92,7 @@ const webpackConfig = {
   plugins: [
     new ProgressBarPlugin(),
     new htmlWebpackPlugin({
-      // title: 'title',
+      title: `${title} - ${subtitle}`,
       template: `${appPath}/${template}`,
       filename: 'index.html',
     }),
@@ -121,7 +122,7 @@ if (NODE_ENV == 'development') {
     new UglifyJsPlugin({
       uglifyOptions: {
         compress: {
-          pure_funcs: 'console.log', // 删除console.log, 保留 info ，warn，error 等
+          pure_funcs: ['console.log'], // 删除console.log, 保留 info ，warn，error 等
         },
       }
     })

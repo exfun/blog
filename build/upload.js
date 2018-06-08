@@ -32,7 +32,7 @@ if (!UPLOAD_ENV) {
     }
   })
 } else {
-  uploadToPages(uploadConfig[UPLOAD_ENV],UPLOAD_ENV)
+  uploadToPages(uploadConfig[UPLOAD_ENV], UPLOAD_ENV)
 }
 
 /**
@@ -57,8 +57,14 @@ async function uploadToPages(uploadOptions, name) {
   }
 
   webpackBuild({ type: 'pages' }).then(res => {
-    // 写入 CNAME
     const { cname } = uploadOptions
+
+    // 用 index 替代 404
+    fs.createReadStream(`${inputPath}/index.html`).pipe(fs.createWriteStream(`${inputPath}/404.html`))
+    // 目前无法 强制返回 200 ok 等待 github 后续支持
+    // fs.writeFile(`${inputPath}/.nojekyll`, '', err => err && chalk.redBright('=> 写入 .nojekyll 文件失败\n' + err))
+
+    // 写入 CNAME
     if (cname) {
       fs.writeFile(`${inputPath}/CNAME`, cname, err => {
         if (!err) {
