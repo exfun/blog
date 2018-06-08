@@ -1,14 +1,20 @@
 $padding:16px;
 $margin:16px;
+$shadow_sm:0 1px 3px rgba(26, 26, 26, .1);
 // color
 $color_background:#f6f6f6;
 $color_main:#3075a1;
+$color_sub:#ee8b57;
 $color_header:#fff;
+$color_text_default:#333;
+$color_text_gray:#646464;
+$color_text_light:#8590a6;
 // size-width
 $width_xs:480px;
 $width_sm:750px;
 $width_md:992px;
 $width_lg:1200px;
+$width_container:1000px;
 // size-height
 $height_header:52px;
 // media-max

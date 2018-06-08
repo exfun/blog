@@ -2,8 +2,17 @@
 .nav-bar {
   background-color: $color_header;
   overflow: hidden;
-  box-shadow: 0 1px 3px rgba(26, 26, 26, .1);
-  height: $height_header;
+  box-shadow: $shadow_sm;
+  padding: 0 $padding;
+  .container {
+    height: $height_header;
+    .logo {
+      font-size: 28px;
+      width: 30px;
+      height: 30px;
+      color: $color_main;
+    }
+  }
   @media #{$max_xs} {
     background-color: #000;
   }

@@ -6,7 +6,7 @@ import { exec, execSync } from 'child_process'
 import { prompt } from 'inquirer'
 import { clearDir } from './utils'
 
-import { dist } from '../config/app.config'
+import { dist } from '../config/dev.config'
 import uploadConfig from '../config/upload.config'
 import build from './build'
 import uploadToFtp from './upload-ftp'

@@ -1,0 +1,27 @@
+@import './var';
+.container {
+  max-width: $width_container;
+}
+
+
+// text ----------------------
+
+.text-main {
+  color: $color_main;
+}
+
+.text-sub {
+  color: $color_sub;
+}
+
+.text-default {
+  color: $color_text_default
+}
+
+.text-gray {
+  color: $color_text_gray
+}
+
+.text-light {
+  color: $color_text_light
+}

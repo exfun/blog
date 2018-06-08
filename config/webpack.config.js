@@ -6,7 +6,7 @@ const ProgressBarPlugin = require('progress-bar-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
-const { source, dist, template } = require('./app.config')
+const { source, dist, template } = require('./dev.config')
 
 const { NODE_ENV } = process.env
 
@@ -84,6 +84,7 @@ const webpackConfig = {
     new webpack.ProvidePlugin({
       $api: 'src/api',
       $app: 'src/utils/app.js',
+      $config: 'config/app.config.js',
     })
   ],
 

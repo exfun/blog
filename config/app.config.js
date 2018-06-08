@@ -1,10 +1,4 @@
 module.exports = {
-
-  publicPath: '',
-  port: '2333',
-  source: 'src',
-  dist: 'dist',
-  template: 'index.html',
-
-  
+  title: 'LANTEN',
+  subTitle: '水浅王八多,遍地是大哥',
 }

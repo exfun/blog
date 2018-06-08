@@ -6,4 +6,20 @@
   &.column {
     flex-direction: column;
   }
+  &.center {
+    justify-content: center;
+    align-items: center;
+  }
+  &.center-h {
+    justify-content: center;
+  }
+  &.center-v {
+    align-items: center;
+  }
+  .flex1 {
+    flex: 1;
+  }
+  .flex-none {
+    flex: none;
+  }
 }
