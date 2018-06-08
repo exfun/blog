@@ -7,7 +7,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
 const { source, dist, template, template404 } = require('./dev.config')
-const { title, subtitle } = require('./app.config')
+const appConfig = require('./app.config')
 
 const { NODE_ENV } = process.env
 
@@ -92,8 +92,8 @@ const webpackConfig = {
   plugins: [
     new ProgressBarPlugin(),
     new htmlWebpackPlugin({
-      title: `${title} - ${subtitle}`,
       template: `${appPath}/${template}`,
+      templateParameters: appConfig,
       filename: 'index.html',
     }),
     new MiniCssExtractPlugin({
