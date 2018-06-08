@@ -82,7 +82,8 @@ const webpackConfig = {
       chunkFilename: "css/[id]-[chunkhash:7].css"
     }),
     new webpack.ProvidePlugin({
-      api: 'api'
+      $api: 'src/api',
+      $app: 'src/utils/app.js',
     })
   ],
 

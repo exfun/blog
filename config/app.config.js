@@ -6,4 +6,5 @@ module.exports = {
   dist: 'dist',
   template: 'index.html',
 
+  
 }

@@ -1,0 +1,10 @@
+@import '../../styles/var';
+.nav-bar {
+  background-color: $color_header;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(26, 26, 26, .1);
+  height: $height_header;
+  @media #{$max_xs} {
+    background-color: #000;
+  }
+}

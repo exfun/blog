@@ -12,6 +12,7 @@ import build from './build'
 import uploadToFtp from './upload-ftp'
 
 const { UPLOAD_ENV } = process.env
+
 const rootPath = process.cwd()
 const inputPath = path.resolve(rootPath, dist)
 
@@ -31,7 +32,7 @@ if (!UPLOAD_ENV) {
     }
   })
 } else {
-  uploadToPages(uploadConfig[UPLOAD_ENV])
+  uploadToPages(uploadConfig[UPLOAD_ENV],UPLOAD_ENV)
 }
 
 /**
@@ -55,7 +56,7 @@ async function uploadToPages(uploadOptions, name) {
     if (!confirm) return
   }
 
-  webpackBuild().then(res => {
+  webpackBuild({ type: 'pages' }).then(res => {
     // 写入 CNAME
     const { cname } = uploadOptions
     if (cname) {
@@ -247,8 +248,8 @@ function getFtpConfig() {
  * webpack 编译
  * @param {Object} uploadOptions 
  */
-function webpackBuild() {
-  return build({ hideLog: true }).then(res => {
+function webpackBuild(options) {
+  return build({ hideLog: true, ...options }).then(res => {
     console.log(chalk.yellowBright('=> 编译完成，待上传的目录：'), chalk.underline(chalk.magentaBright(inputPath)))
   }).catch((err) => {
     console.log(chalk.redBright('=> 编译失败，上传终止\n' + err))
@@ -259,16 +260,16 @@ function webpackBuild() {
  * Git 上传
  * @param {Object} uploadOptions 
  */
-function gitCommit({ branch = '', https }, name) {
-
+function gitCommit({ branch = 'master', https }, name) {
+  const hash = Date.now()
   // Git 初始化
   syncExec('git init', 'Git 初始化')
   // Git 添加文件
   syncExec('git add .', 'Git 添加文件')
   // Git 添加 Commit
-  syncExec(`git commit -m "commit by node [${Date.now()}]"`, 'Git 添加 Commit')
+  syncExec(`git commit -m "commit by node [${hash}]"`, 'Git 添加 Commit')
 
-  if (branch) {
+  if (branch != 'master') {
     // Git 创建分支
     syncExec(`git branch ${branch}`, 'Git 创建分支')
     // Git 切换分支
@@ -282,7 +283,7 @@ function gitCommit({ branch = '', https }, name) {
   syncExec(`git push -u origin ${branch} -f`, `Git 同步到 ${name} `)
   // 清除 .git 文件夹
   clearDir(inputPath + '/.git', true)
-  console.log(chalk.greenBright(`=> gitCommit 同步执行完成 [${Date.now()}]`))
+  console.log(chalk.greenBright(`=> gitCommit 同步执行完成 [${hash}]`))
 
 }
 

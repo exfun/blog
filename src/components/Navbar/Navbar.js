@@ -1,23 +1,14 @@
 import React from 'react'
-
+import './Navbar.scss'
 export default class Navbar extends React.Component {
 
   constructor() {
     super(...arguments)
-
-    console.log(this.props)
-
-  }
-
-  componentWillMount() {
-    const { appRef } = this.props
-    this.$app = appRef
-
   }
 
   render() {
     return (
-      <div>
+      <div className="nav-bar">
         nav-bar
       </div>
     )

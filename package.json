@@ -6,6 +6,7 @@
   "scripts": {
     "build": "cross-env NODE_ENV=production BUILD_ENV=build babel-node build/build.js",
     "dev": "cross-env NODE_ENV=development babel-node build/dev-server.js",
+    "upload:github": "cross-env NODE_ENV=production UPLOAD_ENV=github babel-node build/upload.js",
     "upload": "cross-env NODE_ENV=production babel-node build/upload.js"
   },
   "config": {

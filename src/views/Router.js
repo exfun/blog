@@ -10,12 +10,11 @@ import { pageRoutes } from '../routes'
 
 export default class AppRouter extends React.Component {
   constructor() {
-    super()
+    super(...arguments)
   }
 
   creatRoute = (routeConfig, i = 0) => {
     const { key = i, path, component: Comp, children, params = {} } = routeConfig
-    const { navbarRef } = this.props
 
     if (children) {
       return (
@@ -28,7 +27,7 @@ export default class AppRouter extends React.Component {
         </Router>
       )
     } else {
-      return <Route exact key={key} path={path} render={props => <Comp {...routeConfig} $nav={navbarRef} />} />
+      return <Route exact key={key} path={path} render={props => <Comp {...routeConfig} />} />
     }
   }
 

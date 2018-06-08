@@ -6,17 +6,17 @@ import Navbar from '../components/Navbar'
 export default class App extends React.Component {
 
   constructor() {
-    super()
+    super(...arguments)
 
-    this.navbarRef = React.createRef()
+    $app.root = this
   }
 
   render() {
     return (
       <div id="app">
-        <Navbar ref={this.navbarRef} appRef={this}></Navbar>
+        <Navbar ref={ref => $app.nav = ref}></Navbar>
         <p>---</p>
-        <Router navbarRef={this.navbarRef} />
+        <Router />
       </div>
     )
   }
