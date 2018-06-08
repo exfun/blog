@@ -1,4 +1,4 @@
 module.exports = {
   title: 'LANTEN',
-  subTitle: '水浅王八多,遍地是大哥',
+  subTitle: '行到水穷处，坐看云起时',
 }

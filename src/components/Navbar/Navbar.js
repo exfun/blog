@@ -12,10 +12,10 @@ export default class Navbar extends React.Component {
     return (
       <header className="flex center nav-bar">
         <div className="flex1 flex row center-v container">
-          <i className="icon icon-react flex-none logo"></i>
+          <img src={require('../../images/logo.svg')} className="flex-none logo" />
           <div className="">
-            <p className="title">{title}</p>
-            <p className="sub-title">{subTitle}</p>
+            <h3 className="title text-gray">{title}</h3>
+            <p className="sub-title text-light fs-12">{subTitle}</p>
           </div>
         </div>
       </header>

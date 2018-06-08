@@ -20,9 +20,6 @@ const webpackConfig = {
   // publicPath: '/',
   entry: `${appPath}/index.js`,
   resolve: {
-    alias: {
-      // api: `${process.cwd()}/api`
-    },
     modules: [process.cwd(), "node_modules"]
   },
   output: {
@@ -55,18 +52,39 @@ const webpackConfig = {
         ]
       },
       {
-        test: /\.(png|jpg|jpeg|gif|svg)$/,
-        include: appPath,
-        use: [
-          {
-            loader: 'url-loader',
-            options: {
-              limit: 1024,
-              name: 'images/[name].[ext]'
-            }
-          }
-        ]
+        test: /\.(png|jpe?g|gif|svg|swf|woff2?|eot|ttf|otf)(\?.*)?$/,
+        loader: 'file-loader',
+        query: {
+          // limit: 10000,
+          name: 'assets/[name].[hash:7].[ext]',
+        }
       }
+      // {
+      //   test: /\.(png|jpg|jpeg|gif)$/,
+      //   include: appPath,
+      //   use: [
+      //     {
+      //       loader: 'url-loader',
+      //       options: {
+      //         limit: 1024,
+      //         name: 'images/[name].[ext]'
+      //       }
+      //     }
+      //   ]
+      // },
+      // {
+      //   test: /\.(svg|woff|woff2|mp3|mp4)$/,
+      //   include: appPath,
+      //   use: [
+      //     {
+      //       loader: 'file-loader',
+      //       options: {
+      //         name: '[path][name].[ext]',
+      //         publicPath: 'assets/'
+      //       }
+      //     }
+      //   ]
+      // }
     ]
   },
 
@@ -103,7 +121,7 @@ if (NODE_ENV == 'development') {
     new UglifyJsPlugin({
       uglifyOptions: {
         compress: {
-          drop_console: true, // 删除log
+          pure_funcs: 'console.log', // 删除console.log, 保留 info ，warn，error 等
         },
       }
     })

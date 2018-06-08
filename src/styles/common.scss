@@ -3,15 +3,9 @@
   max-width: $width_container;
 }
 
-
 // text ----------------------
-
 .text-main {
   color: $color_main;
-}
-
-.text-sub {
-  color: $color_sub;
 }
 
 .text-default {
@@ -24,4 +18,11 @@
 
 .text-light {
   color: $color_text_light
+}
+
+// font-size ------------------
+@for $i from 10 through 48 {
+  .fs-#{$i} {
+    font-size: #{$i}px;
+  }
 }

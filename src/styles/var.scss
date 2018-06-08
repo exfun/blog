@@ -1,14 +1,20 @@
 $padding:16px;
 $margin:16px;
-$shadow_sm:0 1px 3px rgba(26, 26, 26, .1);
+$shadow:0 1px 3px rgba(26, 26, 26, .1);
 // color
-$color_background:#f6f6f6;
-$color_main:#3075a1;
-$color_sub:#ee8b57;
+$color_border:#f1f3f5;
+// ----
+$color_background:#f8f9fa;
+$color_main:#009fb7;
 $color_header:#fff;
-$color_text_default:#333;
+$color_yellow:#ffca3a;
+$color_green:#8ac926;
+$color_red:#FE4A49;
+$color_black:#3c4859;
+// ---- 
+$color_text_default:#495057;
 $color_text_gray:#646464;
-$color_text_light:#8590a6;
+$color_text_light:#adb5bd;
 // size-width
 $width_xs:480px;
 $width_sm:750px;

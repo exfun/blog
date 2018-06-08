@@ -2,18 +2,20 @@
 .nav-bar {
   background-color: $color_header;
   overflow: hidden;
-  box-shadow: $shadow_sm;
+  box-shadow: $shadow;
   padding: 0 $padding;
+  // border-bottom: 1px solid $color_border;
   .container {
     height: $height_header;
     .logo {
-      font-size: 28px;
-      width: 30px;
-      height: 30px;
+      $size: 36px;
+      width: $size;
+      height: $size;
       color: $color_main;
+      margin-right: 8px;
     }
   }
   @media #{$max_xs} {
-    background-color: #000;
+    background-color: $color_black;
   }
 }
