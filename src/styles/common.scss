@@ -1,7 +1,5 @@
 @import './var';
-.container {
-  max-width: $width_container;
-}
+
 
 // text ----------------------
 .text-main {
@@ -9,15 +7,15 @@
 }
 
 .text-default {
-  color: $color_text_default
+  color: $color_default
 }
 
 .text-gray {
-  color: $color_text_gray
+  color: $color_gray
 }
 
 .text-light {
-  color: $color_text_light
+  color: $color_light
 }
 
 // font-size ------------------

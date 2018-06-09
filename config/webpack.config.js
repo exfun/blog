@@ -92,6 +92,7 @@ const webpackConfig = {
   plugins: [
     new ProgressBarPlugin(),
     new htmlWebpackPlugin({
+      favicon: `${appPath}/images/favicon.ico`,
       template: `${appPath}/${template}`,
       templateParameters: appConfig,
       filename: 'index.html',

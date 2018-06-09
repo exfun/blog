@@ -1,0 +1,34 @@
+@import '../../styles/var';
+.comp-input-group {
+  border: 1px solid $color_border;
+  border-radius: $radius;
+  font-size: 14px;
+  transition: all 0.2s;
+  width: 200px;
+  &.focus {
+    border-color: $color_light;
+  }
+  input {
+    padding: $padding/2 $padding;
+    background-color: transparent;
+    overflow: hidden;
+    border: none;
+    outline: none;
+    font-size: inherit;
+    &::-webkit-input-placeholder {
+      color: $color_light;
+    }
+  }
+}
+
+// input::-webkit-input-placeholder {
+//   color: red;
+// }
+// input::-moz-placeholder {
+//   /* Mozilla Firefox 19+ */
+//   color: red;
+// }
+// input:-moz-placeholder {
+//   /* Mozilla Firefox 4 to 18 */
+//   color: red;
+// }

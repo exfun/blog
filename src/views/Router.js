@@ -27,7 +27,7 @@ export default class AppRouter extends React.Component {
         </Router>
       )
     } else {
-      return <Route exact key={key} path={path} render={props => <Comp {...routeConfig} />} />
+      return <Route exact key={key} path={path} render={props => <Comp {...routeConfig} {...props} />} />
     }
   }
 

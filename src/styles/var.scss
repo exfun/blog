@@ -1,8 +1,6 @@
-$padding:16px;
-$margin:16px;
-$shadow:0 1px 3px rgba(26, 26, 26, .1);
 // color
-$color_border:#f1f3f5;
+$color_border:#ebebeb;
+$color_border_light:#f1f3f5;
 // ----
 $color_background:#f8f9fa;
 $color_main:#009fb7;
@@ -12,9 +10,9 @@ $color_green:#8ac926;
 $color_red:#FE4A49;
 $color_black:#3c4859;
 // ---- 
-$color_text_default:#495057;
-$color_text_gray:#646464;
-$color_text_light:#adb5bd;
+$color_default:#495057;
+$color_gray:#8590a6;
+$color_light:#adb5bd;
 // size-width
 $width_xs:480px;
 $width_sm:750px;
@@ -33,3 +31,9 @@ $min_xs:screen and (min-width:#{$width_xs});
 $min_sm:screen and (min-width:#{$width_sm});
 $min_md:screen and (min-width:#{$width_md});
 $min_lg:screen and (min-width:#{$width_lg});
+// other
+$padding:16px;
+$margin:16px;
+$shadow:0 1px 3px rgba(26, 26, 26, .1);
+$shadow_light:0 0 4px rgba($color_main, .45);
+$radius:3px;

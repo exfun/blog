@@ -12,7 +12,7 @@ export default class Home extends React.Component {
       console.log(res)
     })
 
-    console.log($app)
+    console.log(this)
 
   }
 

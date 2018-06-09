@@ -3,8 +3,7 @@
   background-color: $color_header;
   overflow: hidden;
   box-shadow: $shadow;
-  padding: 0 $padding;
-  // border-bottom: 1px solid $color_border;
+  padding: 0 $padding; // border-bottom: 1px solid $color_border;
   .container {
     height: $height_header;
     .logo {
@@ -13,6 +12,20 @@
       height: $size;
       color: $color_main;
       margin-right: 8px;
+    }
+    .menus {
+      margin-right: $margin;
+    }
+  }
+  .loading {
+    $size: 36px;
+    width: $size;
+    height: $size;
+  }
+  .comp-input-group {
+    background-color: $color_background;
+    &.focus {
+      background-color: #fff !important;
     }
   }
   @media #{$max_xs} {

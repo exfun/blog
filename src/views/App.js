@@ -13,10 +13,11 @@ export default class App extends React.Component {
 
   render() {
     return (
-      <div id="app">
+      <div id="app" className="layout">
         <Navbar ref={ref => $app.nav = ref}></Navbar>
-        <p>---</p>
-        <Router />
+        <div className="container">
+          <Router />
+        </div>
       </div>
     )
   }

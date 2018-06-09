@@ -7,6 +7,8 @@ body {
 body {
   margin: 0;
   background-color: $color_background;
+  color: $color_default;
+  font-family: 'Fira Code, Menlo, Monaco, Ubuntu Mono, Microsoft Yahei';
 }
 
 h1,
@@ -15,4 +17,18 @@ h3,
 h4,
 p {
   margin: 0;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+  color: $color_gray;
+  &:hover {
+    color: $color_default;
+  }
 }
