@@ -15,6 +15,9 @@
     }
     .menus {
       margin-right: $margin;
+      .menu-item {
+        margin-right: $margin;
+      }
     }
   }
   .loading {

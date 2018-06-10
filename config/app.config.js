@@ -4,4 +4,19 @@ module.exports = {
   subTitle: 'lanten\'s blog',
   index: '/',
   // favicon: require('../src/images/favicon.ico'),
+
+  menus: [
+    {
+      title: '归档',
+      route: 'archive'
+    },
+    {
+      title: '项目',
+      href: 'https://www.github.com/lanten'
+    },
+    {
+      title: '关于',
+      route: 'about'
+    }
+  ]
 }

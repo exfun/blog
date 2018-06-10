@@ -27,7 +27,12 @@ export default class AppRouter extends React.Component {
         </Router>
       )
     } else {
-      return <Route exact key={key} path={path} render={props => <Comp {...routeConfig} {...props} />} />
+      return <Route exact key={key} path={path} render={props => {
+        // 将 router 的 history 暴露到 $app 这个操作只会发生一次
+        if (!$app.history) $app.history = props.history
+
+        return <Comp {...routeConfig} {...props} />
+      }} />
     }
   }
 

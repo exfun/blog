@@ -10,7 +10,16 @@ export default class Navbar extends React.Component {
     super(...arguments)
     // console.log($config)
 
-    // console.log($app)
+  }
+
+  componentDidMount() {
+
+    $app.history.push('page1')
+
+    this.loader(true)
+    setTimeout(() => {
+      this.loader(true)
+    }, 3000)
   }
 
   render() {
@@ -18,16 +27,16 @@ export default class Navbar extends React.Component {
     return (
       <header className="nav-bar">
         <div className="flex1 flex row center-v container">
-          <img src={require('../../images/logo.svg')} className="flex-none logo" />
-          <a href={$config.index}>
-            <h3 className="title text-gray">{title}</h3>
-            <p className="sub-title text-light fs-12">{subTitle}</p>
-          </a>
+          <div className="flex row flex-none">
+            <img src={require('../../images/logo.svg')} className="flex-none logo" />
+            <a href={$config.index}>
+              <h3 className="title text-gray">{title}</h3>
+              <p className="sub-title text-light fs-12">{subTitle}</p>
+            </a>
+          </div>
           <div className="flex1"></div>
           <ul className="flex row menus">
-            <li>test1</li>
-            <li>test2</li>
-            <li>test3</li>
+            {$config.menus.map(this.creatMenus)}
           </ul>
           <div className="flex search">
             <Input
@@ -41,6 +50,28 @@ export default class Navbar extends React.Component {
         </div>
       </header>
     )
+  }
+
+  creatMenus({ title, href, route }, i) {
+    let menuProps = {}
+    if (route) {
+      menuProps = {
+        onClick() {
+          $app.history.push(route)
+        },
+        href: 'javascript:;'
+      }
+    } else {
+      menuProps = {
+        href: 'javascript:;',
+
+      }
+    }
+    return <a className="menu-item" key={i} {...menuProps}>{title}</a>
+  }
+
+  loader(visible) {
+
   }
 
   onSearchFocus(e, isFocus) {
