@@ -15,6 +15,9 @@
     border: none;
     outline: none;
     font-size: inherit;
+    transition: all 0.4s $animation;
+    -webkit-transform-style: preserve-3d;
+    -webkit-backface-visibility: hidden;
     &::-webkit-input-placeholder {
       color: $color_light;
     }

@@ -7,6 +7,10 @@ module.exports = {
 
   menus: [
     {
+      title: '首页',
+      route: '/'
+    },
+    {
       title: '归档',
       route: 'archive'
     },

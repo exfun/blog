@@ -1,6 +1,7 @@
 @import '../../styles/var';
 .nav-bar {
   background-color: $color_header;
+  position: relative;
   overflow: hidden;
   box-shadow: $shadow;
   padding: 0 $padding; // border-bottom: 1px solid $color_border;
@@ -11,6 +12,7 @@
       width: $size;
       height: $size;
       color: $color_main;
+      display: block;
       margin-right: 8px;
     }
     .menus {
@@ -20,18 +22,82 @@
       }
     }
   }
-  .loading {
-    $size: 36px;
-    width: $size;
-    height: $size;
+  $loaderSize: 36px;
+  .loader {
+    display: block;
+    width: $loaderSize;
+    height: $loaderSize;
+    transition: all 0.4s $animation;
+    transform: scale(0, 0);
+    margin-left: 4px;
+    &.loading {
+      // height: $loaderSize;
+      // width: $loaderSize;
+      transform: scale(1, 1);
+    }
   }
-  .comp-input-group {
-    background-color: $color_background;
+  .search {
+    $searchWidth: 240px;
+    width: $searchWidth;
+    transition: all 0.4s $animation;
+    input {
+      background-color: $color_background;
+    }
+    &.min {
+      width: $searchWidth - $loaderSize - 10px;
+    }
     &.focus {
-      background-color: #fff !important;
+      input {
+        background-color: #fff;
+      }
+    }
+  }
+  &.progress {
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 999;
+    }
+    &::after {
+      content: '';
+      opacity: 0;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 0;
+      background: $color_gray;
+      animation: animation-progress 2.4s $animation infinite;
     }
   }
   @media #{$max_xs} {
     background-color: $color_black;
+    .search-content,
+    .menus {
+      display: none;
+    }
+    .search:not(.search-content) {
+      width: auto;
+    }
+  }
+}
+
+@keyframes animation-progress {
+  0% {
+    opacity: 0.1;
+    width: 0;
+  }
+  20% {
+    opacity: 0.5;
+    width: 0;
+  }
+  100% {
+    opacity: 0;
+    width: 100%;
   }
 }

@@ -8,10 +8,11 @@ export default function asyncComponent(importComponent) {
     }
 
     componentDidMount() {
-      // console.log('loading', this.props.$nav)
+      // console.log('loading', $app.nav)
+      $app.nav.loader(true)
       importComponent().then(({ default: comp }) => {
         this.setState({ comp }, () => {
-          console.log('loaded')
+          $app.nav.loader(false)
         })
       });
     }

@@ -1,4 +1,5 @@
 import React from 'react'
+import { Transition } from 'react-transition-group'
 
 import Input from '../Input'
 import './Navbar.scss'
@@ -9,25 +10,29 @@ export default class Navbar extends React.Component {
   constructor() {
     super(...arguments)
     // console.log($config)
-
+    this.state = {}
   }
 
   componentDidMount() {
 
     // $app.history.push('page1')
 
-    this.loader(true)
+    // this.loader(true)
     setTimeout(() => {
       this.loader(true)
-    }, 3000)
+    }, 1000)
+    // setTimeout(() => {
+    //   this.loader(false)
+    // }, 8000)
   }
 
   render() {
     const { title, subTitle } = $config
+    const { isLoading } = this.state
     return (
-      <header className="nav-bar">
+      <header className={`nav-bar ${isLoading ? 'progress' : ''}`}>
         <div className="flex1 flex row center-v container">
-          <a className="flex row flex-none" href={$config.index}>
+          <a className="flex row center-v flex-none" href={$config.index}>
             <img src={require('../../images/logo.svg')} className="flex-none logo" />
             <div>
               <h3 className="title text-gray">{title}</h3>
@@ -38,15 +43,22 @@ export default class Navbar extends React.Component {
           <ul className="flex row menus">
             {$config.menus.map(this.creatMenus)}
           </ul>
-          <div className="flex search">
+          <div className="flex row search">
             <Input
-              group={{ style: { lineHeight: '24px' }, className: 'flex1' }}
+              group={{ className: `search search-content ${isLoading ? 'min' : ''}` }}
               placeholder="搜索文章..."
               onFocus={(e) => this.onSearchFocus(e, true)}
               onBlur={(e) => this.onSearchFocus(e, false)}
             />
+
+            <Transition in={isLoading} timeout={10} unmountOnExit>
+              {state => {
+                return <div>
+                  <img className={`loader ${state == 'entered' && 'loading'}`} src={require('../../images/loaders/loader7.svg')} />
+                </div>
+              }}
+            </Transition>
           </div>
-          <img className="loading" src={require('../../images/loaders/loader3.svg')} />
         </div>
       </header>
     )
@@ -69,7 +81,17 @@ export default class Navbar extends React.Component {
     return <a className="menu-item" key={i} {...menuProps}>{title}</a>
   }
 
-  loader(visible) {
+  loader(isLoading) {
+    const loaderTM = Date.now()
+    const time = loaderTM - (this.loaderTM || 0)
+    if (time <= 400) {
+      setTimeout(() => {
+        this.setState({ isLoading })
+      }, 400)
+    } else {
+      this.setState({ isLoading })
+    }
+    if (isLoading) this.loaderTM = loaderTM // 记录开始时间
 
   }
 
