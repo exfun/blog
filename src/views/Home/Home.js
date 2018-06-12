@@ -8,13 +8,15 @@ export default class Home extends React.Component {
 
   componentDidMount() {
 
-    $api.request('getIssues', {}).then(res => {
-      console.log(res)
-    })
+    console.log('创建')
+    // $api.request('getIssues', {}).then(res => {
+    //   console.log(res)
+    // })
 
-    console.log(this)
+    // console.log(this)
 
   }
+
 
   render() {
     return (

@@ -14,7 +14,7 @@ export default class Navbar extends React.Component {
 
   componentDidMount() {
 
-    $app.history.push('page1')
+    // $app.history.push('page1')
 
     this.loader(true)
     setTimeout(() => {
@@ -27,13 +27,13 @@ export default class Navbar extends React.Component {
     return (
       <header className="nav-bar">
         <div className="flex1 flex row center-v container">
-          <div className="flex row flex-none">
+          <a className="flex row flex-none" href={$config.index}>
             <img src={require('../../images/logo.svg')} className="flex-none logo" />
-            <a href={$config.index}>
+            <div>
               <h3 className="title text-gray">{title}</h3>
               <p className="sub-title text-light fs-12">{subTitle}</p>
-            </a>
-          </div>
+            </div>
+          </a>
           <div className="flex1"></div>
           <ul className="flex row menus">
             {$config.menus.map(this.creatMenus)}
@@ -63,8 +63,7 @@ export default class Navbar extends React.Component {
       }
     } else {
       menuProps = {
-        href: 'javascript:;',
-
+        href,
       }
     }
     return <a className="menu-item" key={i} {...menuProps}>{title}</a>
