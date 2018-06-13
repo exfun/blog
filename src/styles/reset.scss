@@ -8,7 +8,7 @@ body {
   margin: 0;
   background-color: $color_background;
   color: $color_default;
-  font-family: 'Fira Code, Menlo, Monaco, Ubuntu Mono, Microsoft Yahei';
+  font-family: 'Menlo, Monaco, Microsoft Yahei';
 }
 
 h1,
@@ -30,6 +30,9 @@ a {
   color: $color_gray;
   transition: color 0.2s;
   &:hover {
+    color: $color_default;
+  }
+  &:focus {
     color: $color_default;
   }
 }

@@ -3,7 +3,7 @@ import githubAPI from "./github-api"
 export const api = Object.assign({}, githubAPI)
 
 export function request(key, params, options = {}) {
-  const { config = 'githubConfig' } = options
+  const { config = 'githubConfig', loading = true } = options
   let { method = 'GET', host, accept, url } = api[config]
   const target = api[key]
 
@@ -25,6 +25,18 @@ export function request(key, params, options = {}) {
     body: params,
   }
 
-  return fetch(`${host}${url}`, requestHead).then(res => res.json())
+  if (loading) $app.nav.loader(true)
+
+  return fetch(`${host}${url}`, requestHead).then(res => {
+    if (loading) $app.nav.loader(false)
+    return res.json()
+  })
 }
 
+
+window.fetch = () => {
+  console.log('fetchllll')
+  return new Promise((resolve, reject) => {
+    resolve()
+  })
+}

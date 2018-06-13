@@ -1,10 +1,13 @@
 @import '../../styles/var';
 .nav-bar {
-  background-color: $color_header;
-  position: relative;
-  overflow: hidden;
+  background-color: rgba($color_header, .95);
+  position: fixed;
+  z-index: 999;
+  top: 0;
+  left: 0;
+  right: 0;
   box-shadow: $shadow;
-  padding: 0 $padding; // border-bottom: 1px solid $color_border;
+  padding: 0 $padding;
   .container {
     height: $height_header;
     .logo {
@@ -19,6 +22,24 @@
       margin-right: $margin;
       .menu-item {
         margin-right: $margin;
+        cursor: pointer;
+      }
+      .submenu {
+        background-color: #fff;
+        padding: 4px $padding;
+        border-radius: $radius;
+        border: 1px solid $color_border;
+      }
+      .rc-dropdown {
+        &:hover {
+          $offsetTop: 22px;
+          &::after {
+            height: calc(100% + $offsetTop);
+          }
+          &>.rc-dropdown-content {
+            transform: translateY($offsetTop);
+          }
+        }
       }
     }
   }

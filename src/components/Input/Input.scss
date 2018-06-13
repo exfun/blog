@@ -1,10 +1,11 @@
 @import '../../styles/var';
-.comp-input-group {
+.rc-input-group {
   border: 1px solid $color_border;
   border-radius: $radius;
   font-size: 14px;
   transition: all 0.2s;
   width: 200px;
+  overflow: hidden;
   &.focus {
     border-color: $color_light;
   }

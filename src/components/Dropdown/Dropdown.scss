@@ -1,0 +1,30 @@
+@import '../../styles/var';
+.rc-dropdown {
+  position: relative;
+  cursor: pointer;
+  overflow: hidden;
+  .rc-dropdown-content {
+    position: absolute;
+    transform: translateY(50%);
+    transition: transform 0.4s $animation;
+    opacity: 0;
+  }
+  &:hover,
+  &.active {
+    $offsetTop: 8px;
+    overflow: visible;
+    &::after {
+      content: '';
+      display: block;
+      position: relative;
+      width: 100%;
+      height: 100%;
+      left: 0;
+      height: calc(100% + $offsetTop);
+    }
+    &>.rc-dropdown-content {
+      opacity: 1;
+      transform: translateY($offsetTop);
+    }
+  }
+}

@@ -15,8 +15,13 @@ module.exports = {
       route: 'archive'
     },
     {
-      title: '项目',
-      href: 'https://www.github.com/lanten'
+      title: '子菜单',
+      // href: 'https://www.github.com/lanten'\
+      children: [
+        { title: 'test1', route: 'test1' },
+        { title: 'submenu', route: 'submenu' },
+        { title: 'submenu2', route: 'submenu2' },
+      ]
     },
     {
       title: '关于',

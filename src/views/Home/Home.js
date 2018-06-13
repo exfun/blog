@@ -9,9 +9,9 @@ export default class Home extends React.Component {
   componentDidMount() {
 
     console.log('创建')
-    // $api.request('getIssues', {}).then(res => {
-    //   console.log(res)
-    // })
+    $api.request('getIssues', {}).then(res => {
+      console.log(res)
+    })
 
     // console.log(this)
 
@@ -22,6 +22,70 @@ export default class Home extends React.Component {
     return (
       <div >
         111222444home
+        <div>br</div>
+        <div>br</div>
+        <div>br</div>
+        <div>br</div>
+        <div>br</div>
+        <div>br</div>
+        <div>br</div>
+        <div>br</div>
+        <div>br</div>
+        <div>br</div>
+        <div>br</div>
+        <div>br</div>
+        <div>br</div>
+        <div>br</div>
+        <div>br</div>
+        <div>br</div>
+        <div>br</div>
+        <div>br</div>
+        <div>br</div>
+        <div>br</div>
+        <div>br</div>
+        <div>br</div>
+        <div>br</div>
+        <div>br</div>
+        <div>br</div>
+        <div>br</div>
+        <div>br</div>
+        <div>br</div>
+        <div>br</div>
+        <div>br</div>
+        <div>br</div>
+        <div>br</div>
+        <div>br</div>
+        <div>br</div>
+        <div>br</div>
+        <div>br</div>
+        <div>br</div>
+        <div>br</div>
+        <div>br</div>
+        <div>br</div>
+        <div>br</div>
+        <div>br</div>
+        <div>br</div>
+        <div>br</div>
+        <div>br</div>
+        <div>br</div>
+        <div>br</div>
+        <div>br</div>
+        <div>br</div>
+        <div>br</div>
+        <div>br</div>
+        <div>br</div>
+        <div>br</div>
+        <div>br</div>
+        <div>br</div>
+        <div>br</div>
+        <div>br</div>
+        <div>br</div>
+        <div>br</div>
+        <div>br</div>
+        <div>br</div>
+        <div>br</div>
+        <div>br</div>
+        <div>br</div>
       </div>
     )
   }

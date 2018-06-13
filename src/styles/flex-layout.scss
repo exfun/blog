@@ -1,4 +1,6 @@
+@import'./var.scss';
 .layout {
+  padding-top: $height_header + $padding;
   .container {
     margin: 0 auto;
     max-width: $width_container;
