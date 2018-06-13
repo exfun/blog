@@ -19,7 +19,9 @@ const webpackConfig = {
   mode: NODE_ENV,
   target: 'web',
   // publicPath: '/',
-  entry: `${appPath}/index.js`,
+  entry: {
+    app: `${appPath}/index.js`
+  },
   resolve: {
     modules: [process.cwd(), "node_modules"]
   },

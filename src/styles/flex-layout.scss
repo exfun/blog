@@ -1,9 +1,16 @@
 @import'./var.scss';
 .layout {
   padding-top: $height_header + $padding;
+  @media #{$max_xs} {
+    padding-top: $height_header + $padding/2;
+  }
   .container {
     margin: 0 auto;
     max-width: $width_container;
+    padding: 0 $padding;
+    @media #{$max_xs} {
+      padding: 0 $padding/2
+    }
   }
   .flex {
     display: flex;

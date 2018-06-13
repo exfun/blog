@@ -8,7 +8,7 @@ $color_header:#fff;
 $color_yellow:#ffca3a;
 $color_green:#8ac926;
 $color_red:#FE4A49;
-$color_black:#3c4859;
+$color_dark:#3c4859;
 // ---- 
 $color_default:#495057;
 $color_gray:#8590a6;
@@ -32,8 +32,8 @@ $min_sm:screen and (min-width:#{$width_sm});
 $min_md:screen and (min-width:#{$width_md});
 $min_lg:screen and (min-width:#{$width_lg});
 // other
-$padding:16px;
-$margin:16px;
+$padding:14px;
+$margin:14px;
 $shadow:0 1px 3px rgba(26, 26, 26, .1);
 $shadow_light:0 0 4px rgba($color_main, .45);
 $radius:3px;

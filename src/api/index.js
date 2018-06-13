@@ -1,3 +1,4 @@
+import axios from 'axios'
 import githubAPI from "./github-api"
 
 export const api = Object.assign({}, githubAPI)
@@ -17,26 +18,29 @@ export function request(key, params, options = {}) {
   }
 
   const requestHead = {
-    method: method,
+    method,
     headers: {
-      'Accept': accept,
-      'content-type': 'application/json'
+      Accept: accept,
+      // 'content-type': 'application/json'
     },
-    body: params,
+    url: `${host}${url}`,
+    data: params,
   }
 
   if (loading) $app.nav.loader(true)
 
-  return fetch(`${host}${url}`, requestHead).then(res => {
+  return axios(requestHead).then((res) => {
     if (loading) $app.nav.loader(false)
-    return res.json()
+    return res.data
   })
+
 }
 
+// axios.interceptors.request.use(config => {
+//   config.headers = Object.assign({}, { 'X-Requested-With': 'XMLHttpRequest' }, config.headers)
+//   return config
+// }, error => {
+//   return Promise.reject(error)
+// })
 
-window.fetch = () => {
-  console.log('fetchllll')
-  return new Promise((resolve, reject) => {
-    resolve()
-  })
-}
+// axios.interceptors.response.use(response => response, error => Promise.resolve(error.response))
