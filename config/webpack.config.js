@@ -6,7 +6,7 @@ const ProgressBarPlugin = require('progress-bar-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
-const { source, dist, template, template404 } = require('./dev.config')
+const { source, dist, template, publicPath } = require('./dev.config')
 const appConfig = require('./app.config')
 
 const { NODE_ENV } = process.env
@@ -18,7 +18,6 @@ console.log(NODE_ENV, appPath)
 const webpackConfig = {
   mode: NODE_ENV,
   target: 'web',
-  // publicPath: '/',
   entry: {
     app: `${appPath}/index.js`
   },
@@ -26,8 +25,8 @@ const webpackConfig = {
     modules: [process.cwd(), "node_modules"]
   },
   output: {
+    publicPath,
     path: path.join(__dirname, `../${dist}`),
-    // publicPath: '',
     filename: 'js/[name]-[hash:7].js',
     chunkFilename: 'js/[id]-[chunkhash:7].js',
   },

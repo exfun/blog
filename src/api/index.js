@@ -8,6 +8,8 @@ export function request(key, params, options = {}) {
   let { method = 'GET', host, accept, url } = api[config]
   const target = api[key]
 
+  if (loading) $app.nav.loader(true)
+
   if (typeof target == 'object') {
     const { url: targetUrl, accept: targetAccept, method: targetMethod } = target
     url = targetUrl
@@ -17,24 +19,29 @@ export function request(key, params, options = {}) {
     url = target
   }
 
+  url = `${host}${url}`
   const requestHead = {
     method,
     headers: {
       Accept: accept,
       // 'content-type': 'application/json'
     },
-    url: `${host}${url}`,
+    url,
     data: params,
   }
 
-  if (loading) $app.nav.loader(true)
+  if (method.toLowerCase() === 'get') {
+    return axios.get(url, { params }).then(checkStatus)
+  } else {
+    return axios(requestHead).then(checkStatus)
+  }
 
-  return axios(requestHead).then((res) => {
+  function checkStatus(res) {
     if (loading) $app.nav.loader(false)
     return res.data
-  })
-
+  }
 }
+
 
 // axios.interceptors.request.use(config => {
 //   config.headers = Object.assign({}, { 'X-Requested-With': 'XMLHttpRequest' }, config.headers)

@@ -1,4 +1,5 @@
 import React from 'react'
+import { navigate } from "@reach/router"
 
 import Router from './Router'
 import Navbar from '../components/Navbar'
@@ -9,6 +10,7 @@ export default class App extends React.Component {
     super(...arguments)
 
     $app.root = this
+    $app.nav = navigate
   }
 
   render() {

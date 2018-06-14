@@ -61,13 +61,13 @@ const app = express()
 app.use(devMiddleware)
 app.use(hotMiddleware)
 
-app.get('*', ({ url }, res) => {
+app.get('*/*', ({ url }, res) => {
   // const htmlFile = devMiddleware.fileSystem.readFileSync('./index.html', 'utf-8')
   const htmlFile = devMiddleware.fileSystem.readFileSync(path.join(webpackConfig.output.path, 'index.html'))
 
   console.log('=> 重定向', url)
-  res.writeHeader(200, { 'Content-Type': 'text/html' });
-  res.end(htmlFile);
+  res.writeHeader(200, { 'Content-Type': 'text/html' })
+  res.end(htmlFile)
 })
 
 if (config.proxy) {

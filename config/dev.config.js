@@ -1,6 +1,6 @@
 module.exports = {
 
-  publicPath: '',
+  publicPath: process.env.ASSET_PATH || '/',
   port: '2333',
   source: 'src',
   dist: 'dist',

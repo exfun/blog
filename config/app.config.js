@@ -3,6 +3,7 @@ module.exports = {
   // subTitle: '行到水穷处，坐看云起时',
   subTitle: 'lanten\'s blog',
   index: '/',
+  github: 'lanten',
   // favicon: require('../src/images/favicon.ico'),
 
   menus: [

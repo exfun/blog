@@ -1,5 +1,6 @@
 import React from 'react'
 import { Transition } from 'react-transition-group'
+import { Link } from "@reach/router"
 
 import Input from '../Input'
 import Dropdown from '../Dropdown'
@@ -17,15 +18,6 @@ export default class Navbar extends React.Component {
 
   componentDidMount() {
 
-    // $app.history.push('page1')
-
-    // this.loader(true)
-    // setTimeout(() => {
-    //   this.loader(true)
-    // }, 1000)
-    // setTimeout(() => {
-    //   this.loader(false)
-    // }, 8000)
   }
 
   render() {
@@ -67,27 +59,24 @@ export default class Navbar extends React.Component {
   }
 
   creatMenus = ({ title, href, route, children, key }, i) => {
-    let menuProps = {}
+    let MenuItem
 
     if (route) {
-      menuProps.onClick = () => $app.history.push(route)
+      MenuItem = (props) => <Link {...props} to={route}>{props.children}</Link>
     } else {
-      menuProps.href = href
+      MenuItem = (props) => <a {...props} href={href}>{props.children}</a>
     }
 
     if (children && children.length) {
-      const titleComp = (
-        <a {...menuProps}>{title} <i className="icon icon-down2 fs-14"></i></a>
-      )
       return (
-        <Dropdown className="menu-item" key={key || i} title={() => titleComp}>
+        <Dropdown className="menu-item" key={key || i} title={() => <MenuItem>{title} <i className="icon icon-down2 fs-14"></i></MenuItem>}>
           <ul className="submenu">
             {children.map(this.creatMenus)}
           </ul>
         </Dropdown>
       )
     } else {
-      return <li key={key || i} className="menu-item"><a {...menuProps}>{title}</a></li>
+      return <li key={key || i} className="menu-item"><MenuItem>{title}</MenuItem></li>
     }
   }
 
