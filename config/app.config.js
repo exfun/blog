@@ -11,21 +11,44 @@ module.exports = {
       route: '/'
     },
     {
-      title: '归档',
-      route: 'archive'
+      title: '列表',
+      route: '/list'
     },
     {
-      title: '子菜单',
-      // href: 'https://www.github.com/lanten'\
+      title: '其它',
       children: [
-        { title: 'test1', route: 'test1' },
-        { title: 'submenu', route: 'submenu' },
-        { title: 'submenu2', route: 'submenu2' },
+        { title: '一排子菜单', route: 'test1' },
+        { title: 'github', href: 'https://www.github.com/lanten' },
+        { title: '归档', route: 'submenu2' },
+        {
+          title: '关于', route: 'submenu2', children: [
+            { title: '一排子菜单', route: 'test1' },
+            { title: '一排子菜单', route: 'test1' },
+            { title: '一排子菜单', route: 'test1' },
+          ]
+        },
+        {
+          title: 'submenu-lv2', route: 'submenu2', children: [
+            { title: 'er排子菜单', route: 'test1' },
+            { title: 'er排子菜单', route: 'test1' },
+            {
+              title: 'submenu-lv2', route: 'test1', children: [
+                { title: '没想到吧?', route: 'test1' },
+                { title: '如果屏幕无限宽', route: 'test1' },
+                { title: '理论上可以', route: 'test1' },
+                { title: '无限递归', route: 'test1' },
+              ]
+            },
+          ]
+        },
+        {
+          title: 'submenu', route: 'submenu2', children: [
+            { title: 'san排子菜单', route: 'test1' },
+            { title: 'san排子菜单', route: 'test1' },
+            { title: 'san排子菜单', route: 'test1' },
+          ]
+        },
       ]
     },
-    {
-      title: '关于',
-      route: 'about'
-    }
   ]
 }

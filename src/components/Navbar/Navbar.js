@@ -47,11 +47,11 @@ export default class Navbar extends React.Component {
           </ul>
           <div className="flex row search">
             <Input
-              group={{ className: `search search-content ${isLoading ? 'min' : ''}` }}
-              placeholder="搜索文章..."
-              onFocus={(e) => this.onSearchFocus(e, true)}
-              onBlur={(e) => this.onSearchFocus(e, false)}
-            />
+              className={`search search-content ${isLoading ? 'min' : ''}`}
+              input={{ placeholder: '搜索文章...' }}
+            >
+              <i className="icon icon-search text-light"></i>
+            </Input>
 
             <Transition in={isLoading} timeout={10} unmountOnExit>
               {state => {
@@ -62,12 +62,12 @@ export default class Navbar extends React.Component {
             </Transition>
           </div>
         </div>
-      </header>
+      </header >
     )
   }
 
   creatMenus = ({ title, href, route, children, key }, i) => {
-    let menuProps = { children: title }
+    let menuProps = {}
 
     if (route) {
       menuProps.onClick = () => $app.history.push(route)
@@ -76,21 +76,18 @@ export default class Navbar extends React.Component {
     }
 
     if (children && children.length) {
+      const titleComp = (
+        <a {...menuProps}>{title} <i className="icon icon-down2 fs-14"></i></a>
+      )
       return (
-        <Dropdown className="menu-item" key={key || i} title={() => <a {...menuProps}></a>}>
+        <Dropdown className="menu-item" key={key || i} title={() => titleComp}>
           <ul className="submenu">
             {children.map(this.creatMenus)}
           </ul>
         </Dropdown>
-        // <li className="menu-item menu-hover" {...liProps}>
-        //   <a {...menuProps}></a>
-        //   <ul className="submenu menu-hover-content">
-        //     {children.map(this.creatMenus)}
-        //   </ul>
-        // </li>
       )
     } else {
-      return <li key={key || i} className="menu-item"><a {...menuProps}></a></li>
+      return <li key={key || i} className="menu-item"><a {...menuProps}>{title}</a></li>
     }
   }
 

@@ -6,11 +6,11 @@
   transition: all 0.2s;
   width: 200px;
   overflow: hidden;
+  padding: $padding/2 $padding;
   &.focus {
     border-color: $color_light;
   }
   input {
-    padding: $padding/2 $padding;
     background-color: transparent;
     overflow: hidden;
     border: none;
