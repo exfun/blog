@@ -31,7 +31,7 @@ export default class Input extends React.Component {
     const { focus } = this.state
     const { input = {}, children, className } = this.props
     return (
-      <div {...this.props} className={`rc-input-group flex center-v  ${focus ? 'focus' : ''} ${className}`}>
+      <div className={`rc-input-group flex center-v  ${focus ? 'focus' : ''} ${className}`}>
         <input ref={this.inputRef} {...input} className={`flex1 ${input.className ? input.className : ''}`} />
         {children}
       </div>

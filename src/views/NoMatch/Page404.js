@@ -10,7 +10,8 @@ export default class Page404 extends React.Component {
   render() {
     return (
       <div>
-        404
+        <button onClick={() => $app.nav.loader(true)}> openLoader</button>
+        <button onClick={() => $app.nav.loader(false)}> closeLoader</button>
       </div>
     )
   }

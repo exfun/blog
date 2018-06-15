@@ -24,7 +24,7 @@
         white-space: nowrap;
         cursor: pointer;
         .icon-down2 {
-          transition: all 0.4s $animation;
+          transition: all 0.4s $animationFadeOut;
           display: inline-block;
           position: relative;
           bottom: 0;
@@ -106,15 +106,14 @@
       transform: scale(1, 1);
     }
   }
+  $searchWidth: 240px;
   .search {
-    $searchWidth: 240px;
     width: $searchWidth;
-    transition: all 0.4s $animation;
+    // transition: all 0.4s $animation;
     .search-content {
-      background-color: $color_background;
-    }
-    &.min {
-      width: $searchWidth - $loaderSize - 10px;
+      // width: $searchWidth;
+      // transition: all 0.4s $animation;
+      // background-color: $color_background;
     }
     &.focus {
       .search-content {
@@ -122,7 +121,12 @@
       }
     }
   }
-  &.progress {
+  &.ls-loading {
+    .search {
+      .search-content {
+        // width: $searchWidth - $loaderSize - 10px;
+      }
+    }
     &::before {
       content: '';
       position: absolute;
@@ -142,7 +146,7 @@
       bottom: 0;
       z-index: 0;
       background: $color_gray;
-      animation: animation-progress 2.4s $animation infinite;
+      animation: animation-progress 2.4s $animationFadeOut infinite;
     }
   }
   @media #{$max_xs} {

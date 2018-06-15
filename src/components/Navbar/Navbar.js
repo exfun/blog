@@ -17,14 +17,14 @@ export default class Navbar extends React.Component {
   }
 
   componentDidMount() {
-
+    setTimeout(() => this.loader(true), 2000)
   }
 
   render() {
     const { title, subTitle } = $config
     const { isLoading } = this.state
     return (
-      <header className={`nav-bar ${isLoading ? 'progress' : ''}`}>
+      <header className={`nav-bar${isLoading ? ' ls-loading' : ''}`}>
         <div className="flex1 flex row center-v container">
           <a className="flex row center-v flex-none" href={$config.index}>
             <img src={require('../../images/logo.svg')} className="flex-none logo" />
@@ -39,7 +39,7 @@ export default class Navbar extends React.Component {
           </ul>
           <div className="flex row search">
             <Input
-              className={`search search-content ${isLoading ? 'min' : ''}`}
+              className="search-content"
               input={{ placeholder: '搜索文章...' }}
             >
               <i className="icon icon-search text-light"></i>
