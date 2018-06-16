@@ -18,9 +18,9 @@
       margin-right: 8px;
     }
     .menus {
-      margin-right: $margin;
+      margin-right: $padding;
       .menu-item {
-        margin-right: $margin;
+        margin-right: $padding;
         white-space: nowrap;
         cursor: pointer;
         .icon-down2 {
@@ -53,7 +53,7 @@
         border: 1px solid $color_border;
         z-index: 1;
         &>.menu-item {
-          $offset: -24px;
+          $offset: -22px;
           padding: 0 $padding;
           padding-top: $padding/2;
           width: 100%;
@@ -108,16 +108,13 @@
   }
   $searchWidth: 240px;
   .search {
-    width: $searchWidth;
-    // transition: all 0.4s $animation;
+    width: $searchWidth; // transition: all 0.4s $animation;
     .search-content {
       // width: $searchWidth;
       // transition: all 0.4s $animation;
-      // background-color: $color_background;
-    }
-    &.focus {
-      .search-content {
-        background-color: #fff;
+      background-color: $color_background;
+      &.focus {
+        background-color: white;
       }
     }
   }
@@ -127,27 +124,27 @@
         // width: $searchWidth - $loaderSize - 10px;
       }
     }
-    &::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      z-index: 999;
-    }
-    &::after {
-      content: '';
-      opacity: 0;
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      z-index: 0;
-      background: $color_gray;
-      animation: animation-progress 2.4s $animationFadeOut infinite;
-    }
+    // &::before {
+    //   content: '';
+    //   position: absolute;
+    //   top: 0;
+    //   left: 0;
+    //   right: 0;
+    //   bottom: 0;
+    //   z-index: 999;
+    // }
+    // &::after {
+    //   content: '';
+    //   opacity: 0;
+    //   position: absolute;
+    //   top: 0;
+    //   left: 0;
+    //   right: 0;
+    //   bottom: 0;
+    //   z-index: 0;
+    //   background: $color_gray;
+    //   animation: animation-progress 2.4s $animationFadeOut infinite;
+    // }
   }
   @media #{$max_xs} {
     background-color: $color_dark;
@@ -167,7 +164,7 @@
     opacity: 0.1;
     width: 0;
   }
-  20% {
+  5% {
     opacity: 0.5;
     width: 0;
   }

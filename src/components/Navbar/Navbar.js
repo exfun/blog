@@ -1,6 +1,6 @@
 import React from 'react'
 import { Transition } from 'react-transition-group'
-import { Link } from "@reach/router"
+import { Link, navigate } from "@reach/router"
 
 import Input from '../Input'
 import Dropdown from '../Dropdown'
@@ -14,10 +14,11 @@ export default class Navbar extends React.Component {
 
     this.state = {}
     this.loaderNum = 0
+    this.navigate = navigate
   }
 
   componentDidMount() {
-    setTimeout(() => this.loader(true), 2000)
+
   }
 
   render() {
@@ -25,7 +26,7 @@ export default class Navbar extends React.Component {
     const { isLoading } = this.state
     return (
       <header className={`nav-bar${isLoading ? ' ls-loading' : ''}`}>
-        <div className="flex1 flex row center-v container">
+        <div className="flex-1 flex row center-v container">
           <a className="flex row center-v flex-none" href={$config.index}>
             <img src={require('../../images/logo.svg')} className="flex-none logo" />
             <div>
@@ -33,7 +34,7 @@ export default class Navbar extends React.Component {
               <p className="sub-title text-light fs-12">{subTitle}</p>
             </div>
           </a>
-          <div className="flex1"></div>
+          <div className="flex-1"></div>
           <ul className="flex row menus">
             {$config.menus.map(this.creatMenus)}
           </ul>

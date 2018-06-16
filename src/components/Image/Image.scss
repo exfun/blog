@@ -1,0 +1,17 @@
+@import '../../styles/var';
+.rc-image {
+  width: 100%;
+  display: block;
+}
+
+.rc-loading-image {
+  background-color: $color_background;
+  height: 100%;
+  border-radius: $radius_lg;
+  border: 1px solid $color_border;
+  .loader {
+    $size: 36px;
+    width: $size;
+    height: $size;
+  }
+}

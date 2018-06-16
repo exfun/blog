@@ -1,0 +1,11 @@
+@import '../../styles/var';
+.home {
+  .main {}
+  .side-panel {
+    margin-left: $padding;
+    width: $width_side;
+    @media #{$max_xs} {
+      display: none;
+    }
+  }
+}

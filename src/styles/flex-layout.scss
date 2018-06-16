@@ -2,14 +2,14 @@
 .layout {
   padding-top: $height_header + $padding;
   @media #{$max_xs} {
-    padding-top: $height_header + $padding/2;
+    padding-top: $height_header + $xs_padding;
   }
   .container {
     margin: 0 auto;
     max-width: $width_container;
     padding: 0 $padding;
     @media #{$max_xs} {
-      padding: 0 $padding/2
+      padding: 0 $xs_padding;
     }
   }
   .flex {
@@ -30,11 +30,13 @@
     &.center-v {
       align-items: center;
     }
-    .flex1 {
-      flex: 1;
-    }
     .flex-none {
       flex: none;
+    }
+    @for $i from 1 through 12 {
+      .flex-#{$i} {
+        flex: #{$i};
+      }
     }
   }
 }

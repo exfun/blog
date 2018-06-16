@@ -6,7 +6,7 @@ export default class Input extends React.Component {
   static defaultProps = {
     group: {}, // 外层样式
     type: 'text',
-    className: 'flex1',
+    className: 'flex-1',
   }
 
   constructor() {
@@ -31,8 +31,8 @@ export default class Input extends React.Component {
     const { focus } = this.state
     const { input = {}, children, className } = this.props
     return (
-      <div className={`rc-input-group flex center-v  ${focus ? 'focus' : ''} ${className}`}>
-        <input ref={this.inputRef} {...input} className={`flex1 ${input.className ? input.className : ''}`} />
+      <div className={`rc-input-group flex center-v${focus ? ' focus' : ''} ${className}`}>
+        <input ref={this.inputRef} {...input} className={`flex-1 ${input.className ? input.className : ''}`} />
         {children}
       </div>
     )

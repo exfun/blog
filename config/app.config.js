@@ -31,15 +31,15 @@ module.exports = {
         {
           title: 'submenu-lv2', route: 'submenu2', children: [
             { title: 'er排子菜单', route: 'test1' },
-            { title: 'er排子菜单', route: 'test1' },
             {
-              title: 'submenu-lv2', route: 'test1', children: [
+              title: 'submenu-lv3', route: 'test1', children: [
                 { title: '没想到吧?', route: 'test1' },
                 { title: '如果屏幕无限宽', route: 'test1' },
                 { title: '理论上可以', route: 'test1' },
                 { title: '无限递归', route: 'test1' },
               ]
             },
+            { title: 'er排子菜单', route: 'test1' },
           ]
         },
         {

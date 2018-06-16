@@ -1,4 +1,4 @@
-// color
+// colors
 $color_border:#ebebeb;
 $color_border_light:#f1f3f5;
 // ----
@@ -19,6 +19,7 @@ $width_sm:750px;
 $width_md:992px;
 $width_lg:1200px;
 $width_container:1000px;
+$width_side:280px;
 // size-height
 $height_header:52px;
 // media-max
@@ -33,10 +34,12 @@ $min_md:screen and (min-width:#{$width_md});
 $min_lg:screen and (min-width:#{$width_lg});
 // other
 $padding:14px;
-$margin:14px;
 $shadow:0 1px 3px rgba(26, 26, 26, .1);
 $shadow_light:0 0 4px rgba($color_main, .45);
 $radius:3px;
+$radius_lg:6px;
 $animation:cubic-bezier(0.25, 0.46, 0.45, 0.94);
 $animationFadeOut:cubic-bezier(0.175, 0.82, 0.265, 1);
 $animationOutBack:cubic-bezier(0.68, -0.55, 0.265, 1.55);
+// xs-layout
+$xs_padding:8px;

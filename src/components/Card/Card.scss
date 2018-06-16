@@ -1,0 +1,62 @@
+@import '../../styles/var';
+$blockWidth: 400px;
+.rc-card {
+  position: relative;
+  background-color: white;
+  padding: $padding;
+  box-shadow: $shadow;
+  border-radius: $radius;
+  margin-bottom: $padding;
+  @media #{$max_xs} {
+    margin-bottom: $xs_padding;
+  }
+  .skeleton {
+    overflow: hidden;
+    position: relative;
+    .row {
+      margin-top: 8px;
+      &:first-child {
+        margin-top: 0;
+      }
+    }
+    .col {
+      height: 14px;
+      background-color: darken($color_background, 3);
+      margin-right: 8px;
+      border-radius: $radius;
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+    .block {
+      $size: 102px;
+      width: $size;
+      height: $size;
+      margin-right: $padding;
+      @media #{$max_xs} {
+        display: none;
+      }
+    }
+    &.loading {
+      &:after {
+        content: '';
+        z-index: 10;
+        background: linear-gradient(to right, transparent, rgba(white, 0.75), transparent);
+        position: absolute;
+        height: 100%;
+        width: $blockWidth;
+        left: -$blockWidth;
+        animation: animation-loading 2.4s $animation infinite;
+      }
+    }
+  }
+}
+
+@keyframes animation-loading {
+  0% {
+    left: -$blockWidth;
+  }
+  100% {
+    left: 100%;
+  }
+}
