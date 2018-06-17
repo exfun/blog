@@ -4,9 +4,10 @@ import './Image.scss'
 export default class ImageClass extends React.Component {
   constructor() {
     super(...arguments)
+    const { className } = this.props
     this.state = {
       image: (
-        <div className="flex center rc-loading-image">
+        <div className={`flex center rc-loading-image ${className}`}>
           <img className="loader" src={require('../../images/loaders/loader3.svg')} />
         </div>
       )
@@ -15,7 +16,7 @@ export default class ImageClass extends React.Component {
 
   componentDidMount() {
     this.loadImageAsync().then(image => {
-      // this.setState({ image })
+      this.setState({ image })
     })
   }
 

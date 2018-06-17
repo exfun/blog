@@ -11,8 +11,8 @@ export default class SidePanel extends React.Component {
     return (
       <React.Fragment>
         <Card>
-          <Image src="https://avatars.githubusercontent.com/lanten?s=460&v=4" style={{ height: 100 }} />
-          Hello Big-Brother
+          <Image src="https://avatars.githubusercontent.com/lanten?s=460&v=4" />
+          Hello
         </Card>
         <Card loading>
           card ok
