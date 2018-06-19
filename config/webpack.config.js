@@ -5,6 +5,7 @@ const htmlWebpackPlugin = require('html-webpack-plugin')
 const ProgressBarPlugin = require('progress-bar-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin")
 
 const { source, dist, template, publicPath } = require('./dev.config')
 const appConfig = require('./app.config')
@@ -129,6 +130,9 @@ if (NODE_ENV == 'development') {
       }
     })
   )
+  webpackConfig.optimization.minimizer = [
+    new OptimizeCSSAssetsPlugin({})
+  ]
 }
 
 module.exports = webpackConfig
