@@ -1,8 +1,8 @@
 import React from 'react'
 
 import './Home.scss'
-import Articles from './Articles'
-import SidePanel from './SidePanel'
+import Articles from './Articles/Articles'
+import SidePanel from './SidePanel/SidePanel'
 
 export default class Home extends React.Component {
   constructor() {
