@@ -71,7 +71,7 @@ app.get('*/*', ({ url }, res) => {
 })
 
 if (config.proxy) {
-  app.use('/', proxy({ target: config.proxy, changeOrigin: false }))
+  app.use(proxy('/', { target: config.proxy, changeOrigin: false }))
 }
 
 app.listen(config.port, function () {
