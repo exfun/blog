@@ -62,6 +62,12 @@ app.use(devMiddleware)
 app.use(hotMiddleware)
 
 app.get('*/*', ({ url }, res) => {
+
+  const hasExt = url.lastIndexOf(".")
+  // const ext = url.substring(hasExt)
+
+  if (hasExt > 0) return next()
+
   // const htmlFile = devMiddleware.fileSystem.readFileSync('./index.html', 'utf-8')
   const htmlFile = devMiddleware.fileSystem.readFileSync(path.join(webpackConfig.output.path, 'index.html'))
 

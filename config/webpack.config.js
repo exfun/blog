@@ -29,7 +29,7 @@ const webpackConfig = {
     publicPath,
     path: path.join(__dirname, `../${dist}`),
     filename: 'js/[name]-[hash:7].js',
-    chunkFilename: 'js/[id]-[chunkhash:7].js',
+    chunkFilename: 'js/[name]-[chunkhash:7].js',
   },
 
 
@@ -59,35 +59,9 @@ const webpackConfig = {
         loader: 'file-loader',
         query: {
           // limit: 10000,
-          name: 'assets/[name].[hash:7].[ext]',
+          name: 'assets/[name]-[hash:7].[ext]',
         }
       }
-      // {
-      //   test: /\.(png|jpg|jpeg|gif)$/,
-      //   include: appPath,
-      //   use: [
-      //     {
-      //       loader: 'url-loader',
-      //       options: {
-      //         limit: 1024,
-      //         name: 'images/[name].[ext]'
-      //       }
-      //     }
-      //   ]
-      // },
-      // {
-      //   test: /\.(svg|woff|woff2|mp3|mp4)$/,
-      //   include: appPath,
-      //   use: [
-      //     {
-      //       loader: 'file-loader',
-      //       options: {
-      //         name: '[path][name].[ext]',
-      //         publicPath: 'assets/'
-      //       }
-      //     }
-      //   ]
-      // }
     ]
   },
 
@@ -101,7 +75,7 @@ const webpackConfig = {
     }),
     new MiniCssExtractPlugin({
       filename: 'css/[name]-[hash:7].css',
-      chunkFilename: "css/[id]-[chunkhash:7].css"
+      chunkFilename: "css/[name]-[chunkhash:7].css"
     }),
     new webpack.ProvidePlugin({
       $api: 'src/api',
@@ -110,7 +84,12 @@ const webpackConfig = {
     })
   ],
 
-  optimization: {},
+  optimization: {
+    // runtimeChunk: true,
+    splitChunks: {
+      name: "common",
+    }
+  },
 }
 
 if (NODE_ENV == 'development') {
@@ -131,7 +110,7 @@ if (NODE_ENV == 'development') {
     })
   )
   webpackConfig.optimization.minimizer = [
-    new OptimizeCSSAssetsPlugin({})
+    new OptimizeCSSAssetsPlugin()
   ]
 }
 
