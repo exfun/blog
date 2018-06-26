@@ -27,6 +27,7 @@ export default class ImageClass extends React.Component {
   loadImageAsync() {
     return new Promise((resolve, reject) => {
       const { src, className } = this.props
+
       const image = new Image()
       image.src = src
 

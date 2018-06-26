@@ -1,7 +1,7 @@
 import React from 'react'
 
 import './Home.scss'
-import Articles from './Articles/Articles'
+import ArticleList from './ArticleList/ArticleList'
 import SidePanel from './SidePanel/SidePanel'
 
 export default class Home extends React.Component {
@@ -13,7 +13,7 @@ export default class Home extends React.Component {
     return (
       <div className="flex row home">
         <div className="flex-1 main">
-          <Articles />
+          <ArticleList />
         </div>
         <div className="side-panel">
           <SidePanel />

@@ -41,7 +41,7 @@ $blockWidth: 400px;
       &:after {
         content: '';
         z-index: 10;
-        background: linear-gradient(to right, transparent, rgba(white, 0.75), transparent);
+        background: linear-gradient(to right, rgba(white, 0), rgba(white, 0.75), rgba(white, 0));
         position: absolute;
         height: 100%;
         width: $blockWidth;

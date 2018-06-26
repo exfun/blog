@@ -28,7 +28,7 @@ export default class Card extends React.Component {
     const { loading, hasBlock } = this.props
 
     return (
-      <div className={`flex row skeleton${loading ? ' loading' : ''}`}>
+      <div className={`flex-1 flex row skeleton${loading ? ' loading' : ''}`}>
         {hasBlock && <div className="col block"></div>}
         <div className="flex-1 flex column">
           <div className="flex row row">
