@@ -12,31 +12,32 @@
       padding: 0 $xs_padding;
     }
   }
-  .flex {
-    display: flex;
-    &.row {
-      flex-direction: row;
-    }
-    &.column {
-      flex-direction: column;
-    }
-    &.center {
-      justify-content: center;
-      align-items: center;
-    }
-    &.center-h {
-      justify-content: center;
-    }
-    &.center-v {
-      align-items: center;
-    }
-    .flex-none {
-      flex: none;
-    }
-    @for $i from 1 through 12 {
-      .flex-#{$i} {
-        flex: #{$i};
-      }
+}
+
+.flex {
+  display: flex;
+  &.row {
+    flex-direction: row;
+  }
+  &.column {
+    flex-direction: column;
+  }
+  &.center {
+    justify-content: center;
+    align-items: center;
+  }
+  &.center-h {
+    justify-content: center;
+  }
+  &.center-v {
+    align-items: center;
+  }
+  .flex-none {
+    flex: none;
+  }
+  @for $i from 1 through 12 {
+    .flex-#{$i} {
+      flex: #{$i};
     }
   }
 }

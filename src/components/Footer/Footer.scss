@@ -1,0 +1,25 @@
+@import '../../styles/var';
+$color:$color_dark;
+.app-footer {
+  padding: $padding;
+  color: rgba($color, 0.45); // background-color: $color_dark;
+  // height: $height_footer;
+  .container {
+    height: 100%;
+  }
+  .icon-heart {
+    $size: 24px;
+    width: $size;
+    height: $size;
+    display: block;
+  }
+  a {
+    color: rgba($color, 0.45);
+    &:hover {
+      color: $color;
+    }
+  }
+  .text-light {
+    color: $color;
+  }
+}

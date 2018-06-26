@@ -2,6 +2,7 @@ import React from 'react'
 
 import Router from './Router'
 import Navbar from '../components/Navbar'
+import Footer from '../components/Footer'
 
 export default class App extends React.Component {
 
@@ -15,9 +16,10 @@ export default class App extends React.Component {
     return (
       <div id="app" className="layout">
         <Navbar ref={ref => $app.nav = ref}></Navbar>
-        <div className="container">
+        <div className="flex-1 container">
           <Router />
         </div>
+        <Footer />
       </div>
     )
   }

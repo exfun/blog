@@ -1,5 +1,12 @@
 @import './var';
+#app {
+  position: relative;
+}
 
+.full-screen {
+  min-width: 100%;
+  min-height: 100%;
+}
 
 // text ----------------------
 .text-main {
@@ -16,6 +23,10 @@
 
 .text-light {
   color: $color_light
+}
+
+.text-white {
+  color: white;
 }
 
 // font-size ------------------

@@ -19,6 +19,7 @@ if (!!window.ActiveXObject || "ActiveXObject" in window) {
   IENot()
 } else {
   const root = document.createElement('div')
+  root.id="root"
   document.body.appendChild(root)
 
   ReactDOM.render(<App />, root)
