@@ -9,7 +9,7 @@ export default class SidePanel extends React.Component {
 
   render() {
     return (
-      <div className="side-panel">
+      <React.Fragment>
         <Card className="flex column center ">
           <Avatar src="https://avatars.githubusercontent.com/lanten?s=460&v=4" size={84} />
           <h2>Hello!</h2>
@@ -17,7 +17,7 @@ export default class SidePanel extends React.Component {
         <Card loading>
           card ok
         </Card>
-      </div>
+      </React.Fragment>
     )
   }
 

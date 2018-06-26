@@ -40,6 +40,7 @@ export default class Navbar extends React.Component {
           </ul>
           <div className="flex row search">
             <Input
+              disabled
               className="search-content"
               input={{ placeholder: '搜索文章...' }}
             >

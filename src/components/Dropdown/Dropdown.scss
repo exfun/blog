@@ -6,7 +6,7 @@
   .rc-dropdown-content {
     position: absolute;
     transform: translateY(50%);
-    transition: all 0.4s $animation;
+    transition: all 0.2s $animation;
     opacity: 0;
   }
   &:hover,

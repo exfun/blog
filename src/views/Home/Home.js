@@ -9,13 +9,6 @@ export default class Home extends React.Component {
     super(...arguments)
   }
 
-  componentDidMount() {
-
-    this.getBannerData()
-
-  }
-
-
   render() {
     return (
       <div className="flex row home">
@@ -27,15 +20,6 @@ export default class Home extends React.Component {
         </div>
       </div>
     )
-  }
-
-  getBannerData() {
-    // $api.request('getIssues', {
-    //   creator: $config.github,
-    //   // labels: 'banner',
-    // }).then(res => {
-    //   console.log(res)
-    // })
   }
 
 } // class end
