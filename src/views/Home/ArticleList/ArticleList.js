@@ -23,7 +23,7 @@ export default class ArticleList extends React.Component {
     return (
       <React.Fragment>
         {articleList.map(this.renderListItem)}
-        <div>
+        <div className="btn btn-default">
           1
         </div>
       </React.Fragment>
