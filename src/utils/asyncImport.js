@@ -4,7 +4,7 @@ export default function asyncComponent(importComponent) {
   class AsyncComponent extends React.Component {
     constructor(props) {
       super(props)
-      this.state = { comp: null };
+      this.state = { comp: null }
     }
 
     componentDidMount() {
@@ -14,7 +14,7 @@ export default function asyncComponent(importComponent) {
         this.setState({ comp }, () => {
           $app.nav.loader(false)
         })
-      });
+      })
     }
 
     render() {
