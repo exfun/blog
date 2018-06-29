@@ -21,9 +21,9 @@ export default class AppRouter extends React.Component {
     const { key = i, path, component: Comp, children, params, default: d } = routeConfig
 
     return (
-      <Comp key={key} path={path} default={d} params={params} >
+      <Comp key={key} path={path} default={d} params={params}>
         {children && children.map(this.creatRoute)}
-      </Comp >
+      </Comp>
     )
   }
 
