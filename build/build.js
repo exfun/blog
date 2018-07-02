@@ -5,7 +5,7 @@ import chalk from 'chalk'
 
 import webpackConfig from '../config/webpack.config'
 
-import { clearDir, bigFont } from './utils'
+import { clearDir } from './utils'
 
 const { BUILD_ENV } = process.env
 
@@ -34,10 +34,8 @@ function build({ hideLog = false } = {}) {
       )
 
       if (stats.hasErrors() || stats.hasWarnings()) {
-        console.log(chalk.redBright(bigFont.FAILED))
         reject(stats)
       } else {
-        if (!hideLog) console.log(chalk.greenBright(bigFont.SUCCESS))
         resolve(stats)
       }
 

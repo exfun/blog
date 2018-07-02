@@ -9,7 +9,6 @@ import proxy from 'http-proxy-middleware'
 
 import webpackConfig from '../config/webpack.config'
 import config from '../config/dev.config'
-import { bigFont } from './utils'
 
 webpackConfig.devtool = 'source-map'
 
@@ -83,6 +82,6 @@ if (config.proxy) {
 app.listen(config.port, function () {
   // process.stdout.clearLine()
   // process.stdout.cursorTo(0)
-  console.log(chalk.yellowBright(bigFont.DEV))
+  console.log('=> '+chalk.yellowBright('dev-server'))
   console.log(`=> dev-server at ${chalk.magenta.underline(`http://localhost:${this.address().port}`)}`)
 })
