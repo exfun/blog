@@ -1,0 +1,37 @@
+@import '../../styles/var.scss';
+.rc-button {
+  background-color: transparent;
+  padding: $padding/2 $padding;
+  border-radius: $radius;
+  color: $color_gray;
+  .rc-button-content {
+    position: relative;
+    background-color: inherit;
+    padding: inherit;
+    border-radius: inherit;
+    color: inherit;
+    transition: background 0.2s $animation;
+    cursor: pointer;
+    user-select: none;
+    overflow: hidden;
+    &:hover {
+      background-color: rgba(#000, 0.1);
+    }
+    .rc-button-ripple {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 0;
+      border-radius: 50%;
+      background-color: rgba(white, 0.55); // transform: scale(0);
+      opacity: 1;
+      transition: all 0.4s $animationFadeOut;
+      &.in {
+        // transform: scale(2);
+        width: 200%;
+        height: 200%;
+      }
+    }
+  }
+}

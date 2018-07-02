@@ -32,6 +32,9 @@
   &.center-v {
     align-items: center;
   }
+  &.between {
+    justify-content: space-between;
+  }
   .flex-none {
     flex: none;
   }

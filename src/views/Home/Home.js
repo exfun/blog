@@ -12,12 +12,8 @@ export default class Home extends React.Component {
   render() {
     return (
       <div className="flex row home">
-        <div className="flex-1 main">
-          <ArticleList />
-        </div>
-        <div className="side-panel">
-          <SidePanel />
-        </div>
+        <ArticleList />
+        <SidePanel />
       </div>
     )
   }

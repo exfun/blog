@@ -13,11 +13,11 @@ export default class Footer extends React.Component {
           <p className="flex row center">
             <span>©</span>&nbsp;
             <span>{new Date().getFullYear()}</span>&nbsp;
-            <img className="icon-heart" src={require('../../images/heart.svg')} />&nbsp;
+            {/* <img className="icon-heart" src={require('../../images/heart.svg')} />&nbsp; */}
+            <i className="icon icon-react text-light fs-14"></i>&nbsp;
             <a href={`https://www.github.com/${$config.github}`} target="_blank">{$config.github}</a>&nbsp;
-            <span><i className="icon icon-react text-light"></i> React</span>
+            {/* <span><i className="icon icon-react text-light fs-14"></i> React</span> */}
           </p>
-
         </div>
       </div >
     )

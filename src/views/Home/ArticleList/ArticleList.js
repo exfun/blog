@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from "@reach/router"
-import Card from '../../../components/Card'
+import { Card, Button } from '../../../components'
 // import Image from '../../../components/Image'
 
 import './ArticleList.scss'
@@ -15,18 +15,19 @@ export default class ArticleList extends React.Component {
   }
 
   componentDidMount() {
-    this.getBannerData()
+    // this.getListData()
   }
 
   render() {
     const { articleList = [] } = this.state
     return (
-      <React.Fragment>
+      <div className="flex-1 article-list">
         {articleList.map(this.renderListItem)}
-        <div className="btn btn-default">
-          1
+        <div className="flex row between pagination-controller">
+          <Button>上一页</Button>
+          <Button>下一页</Button>
         </div>
-      </React.Fragment>
+      </div>
     )
   }
 
@@ -50,7 +51,7 @@ export default class ArticleList extends React.Component {
     )
   }
 
-  getBannerData(page = 0, count = 10) {
+  getListData(page = 0, count = 10) {
     let articleList = []
     for (let i = 0; i < count; i++) {
       articleList.push('')
