@@ -6,7 +6,7 @@ import './Button.scss'
 export default class Button extends React.Component {
 
   static defaultProps = {
-    target: 'div'
+    target: 'a'
   }
 
   constructor(props) {
@@ -17,13 +17,17 @@ export default class Button extends React.Component {
 
   componentDidMount() {
     this.buttonRef.current.addEventListener('click', (e) => {
-      this.setState({ hasRipple: true })
-    })
+      this.setState({ hasRipple: true, rippleActive: true })
+    }, false)
+    this.buttonRef.current.addEventListener('transitionend', (e) => {
+      const { rippleActive } = this.state
+      this.setState({ hasRipple: false })
+    }, false)
   }
 
   render() {
     const { children, target: Target, className } = this.props
-    const { hasRipple } = this.state
+    const { hasRipple, rippleActive } = this.state
     return (
       <Target {...this.props} className={`rc-button ${className ? className : ''}`}>
         <div ref={this.buttonRef} className="rc-button-content">
@@ -31,7 +35,13 @@ export default class Button extends React.Component {
           <Transition in={hasRipple} timeout={10} unmountOnExit>
             {state => {
               return (
-                <div className={`rc-button-ripple ${state == 'entered' ? 'in' : ''}`}></div>
+                <div
+                  className={`
+                    rc-button-ripple 
+                    ${state == 'entered' ? 'in' : ''}
+                    ${rippleActive ? 'active' : ''}
+                  `}
+                ></div>
               )
             }}
           </Transition>
