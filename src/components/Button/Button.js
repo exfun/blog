@@ -16,23 +16,22 @@ export default class Button extends React.Component {
   }
 
   componentDidMount() {
-    this.buttonRef.current.addEventListener('click', (e) => {
-      this.setState({ hasRipple: true, rippleActive: true })
-    }, false)
-    this.buttonRef.current.addEventListener('transitionend', (e) => {
-      const { rippleActive } = this.state
-      this.setState({ hasRipple: false })
+    this.buttonRef.current.addEventListener('click', ({ target }) => {
+      target.className = 'rc-button-content'
+      setTimeout(() => {
+        target.className = 'rc-button-content in'
+      }, 5)
+      // console.log(target)
     }, false)
   }
 
   render() {
     const { children, target: Target, className } = this.props
-    const { hasRipple, rippleActive } = this.state
     return (
       <Target {...this.props} className={`rc-button ${className ? className : ''}`}>
-        <div ref={this.buttonRef} className="rc-button-content">
+        <div ref={this.buttonRef} className={`rc-button-content`}>
           {children}
-          <Transition in={hasRipple} timeout={10} unmountOnExit>
+          {/* <Transition in={hasRipple} timeout={10} unmountOnExit>
             {state => {
               return (
                 <div
@@ -44,7 +43,7 @@ export default class Button extends React.Component {
                 ></div>
               )
             }}
-          </Transition>
+          </Transition> */}
         </div>
       </Target>
     )

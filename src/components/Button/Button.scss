@@ -18,12 +18,19 @@
       background-color: rgba(#000, 0.1);
     }
     &:active {
-      .rc-button-ripple {
+      &:after {
         opacity: 1;
         width: 100%;
+        border-radius: inherit;
       }
     }
-    .rc-button-ripple {
+    &.in {
+      &:after {
+        animation: animation_in .8s $animationFadeOut;
+      }
+    }
+    &:after {
+      content: '';
       position: absolute;
       top: 0;
       left: 0;
@@ -33,11 +40,10 @@
       background-color: rgba(white, 0.55);
       transition: all 1.8s $animationFadeOut;
       opacity: 0.1;
-      &.in {
-        animation: animation_in .8s $animationFadeOut;
-         // opacity: 1;
-        // width: 100%;
-      }
+      z-index: 10; // &.in {
+      //   animation: animation_in .8s $animationFadeOut; // opacity: 1;
+      //   // width: 100%;
+      // }
     }
   }
 }
